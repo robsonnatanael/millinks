@@ -1,0 +1,51 @@
+/* User Area
+--------------------------------------*/
+.user-area {
+    margin: 20px 0px 32px;
+    padding: 15px 0px 0px;
+}
+
+.avatar {
+    width:96px;
+    height:96px;
+}
+
+h3 {
+    color: #7f7d7d;
+    margin-top: 15px;
+}
+
+/* Links
+--------------------------------------*/
+.link {
+    margin-top: 15px;
+}
+
+.link a {
+    background-color: #007cba;
+    border: solid 2px #007cba;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.link a:hover {
+    text-decoration: none;
+    background-color: #FFF;
+    border: solid 2px #007cba;
+    color: #007cba;
+    font-weight: bold;
+}
+
+/* Footer
+--------------------------------------*/
+footer p {
+    text-align: center;
+    font-size: .75em;
+    color: #8C8C8C;
+    margin-top: 50px;
+}
+
+footer p a {
+    text-decoration: none;
+    color: #8C8C8C;
+}
