@@ -4,7 +4,7 @@ const theme = createTheme({
   palette: {
     background: {
       default: '#FFF',
-    }
+    },
   },
   typography: {
     fontFamily: '"Poppins", sans-serif',

@@ -1,7 +1,6 @@
 import '@src/styles/globals.css';
 import type { AppProps } from 'next/app';
-import { ThemeProvider } from '@material-ui/core';
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import theme from '@src/theme';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -12,4 +11,4 @@ function MyApp({ Component, pageProps }: AppProps) {
     </ThemeProvider>
   );
 }
-export default MyApp
+export default MyApp;
