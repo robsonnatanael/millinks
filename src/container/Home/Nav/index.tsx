@@ -10,7 +10,16 @@ const Nav = (props: LinksProps) => {
   return (
     <Container maxWidth="sm" className={classes.root}>
       {links.map(link => (
-        <Button className={classes.btnLink} size="large" variant="contained" color="primary" key={link.id} href={link.url}>{link.title}</Button>
+        <Button
+          className={classes.btnLink}
+          size="large"
+          variant="contained"
+          color="primary"
+          key={link.id}
+          href={link.url}
+        >
+          {link.title}
+        </Button>
       ))}
     </Container>
   );

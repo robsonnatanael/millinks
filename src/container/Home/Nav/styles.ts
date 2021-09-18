@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
   btnLink: {
     margin: '10px 0',
     textTransform: 'none',
-  }
+  },
 }));
 
 export default useStyles;
