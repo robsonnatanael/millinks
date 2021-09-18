@@ -20,6 +20,11 @@ export const data = {
       title: 'GitHub',
       url: 'https://bit.ly/github-rn',
     },
+    {
+      id: 4,
+      title: 'Lista de desejos',
+      url: 'https://bit.ly/listAmazon',
+    },
   ],
   social: {
     linkedIn: 'https://bit.ly/linkedin-rn',
@@ -27,4 +32,4 @@ export const data = {
     instagram: '',
     facebook: '',
   },
-}
+};

@@ -7,14 +7,14 @@ const Footer = () => {
 
   return (
     <footer className={classes.root}>
-      <Container className={classes.containerFooter} >
+      <Container className={classes.containerFooter}>
         <a
           href="https://www.robsonnatanael.com.br"
           target="_blank"
           rel="noopener noreferrer"
           className={classes.link}
         >
-          Desenvolvido por{''}
+          Desenvolvido por
           <Image
             src="/assets/images/footer/logo-robson-natanael.svg"
             alt="logo Robson Natanael"
