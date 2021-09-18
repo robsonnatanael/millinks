@@ -1,4 +1,4 @@
-import '@src/styles/globals.css';
+import GlobalStyle from '@src/styles/globals';
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from '@material-ui/core';
 import { CssBaseline } from '@material-ui/core';
@@ -9,6 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Component {...pageProps} />
+      <GlobalStyle />
     </ThemeProvider>
   );
 }
