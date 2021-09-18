@@ -27,4 +27,4 @@ export const data = {
     instagram: '',
     facebook: '',
   },
-}
+};
