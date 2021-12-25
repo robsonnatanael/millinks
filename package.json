@@ -2,7 +2,11 @@
   "name": "millinks",
   "version": "1.0.0",
   "private": true,
-  "author": "Robson Natanael <natanaelrobson@gmail.com>",
+  "author": {
+    "name": "Robson Natanael",
+    "url": "https://www.robsonnatanael.com.br",
+    "email": "dev@robsonnatanael.com.br"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:robsonnatanael/millinks.git"
