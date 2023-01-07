@@ -1,5 +1,7 @@
 import Image from 'next/image';
-import Container from '@material-ui/core/Container';
+
+import { Container } from '@mui/material';
+
 import useStyles from './styles';
 
 const Footer = () => {

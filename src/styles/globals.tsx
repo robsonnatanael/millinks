@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
+import { css } from '@emotion/react';
 
-export default createGlobalStyle`
+const GlobalStyles = css`
   html,
   body {
     padding: 0;
@@ -16,4 +16,6 @@ export default createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-`
+`;
+
+export default GlobalStyles;
