@@ -1,2 +1,26 @@
-node_modules
-.next
+# Directory Temporary
+.git/
+.github/
+.husky/
+.next/
+.vscode/
+node_modules/
+out/
+
+# Files Configs
+.dockerignore
+.editorconfig
+.eslintignore
+.eslintrc.json
+.env*
+.gitignore
+.lintstagedrc
+.prettierignore
+.prettierrc.json
+.releaserc.json
+CHANGELOG.md
+commitlint.config.js
+docker-compose.yml
+Dockerfile
+*.md
+!README.md
