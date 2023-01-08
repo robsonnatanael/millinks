@@ -5,7 +5,7 @@ import Footer from '@src/components/Footer';
 import Layout from '@src/components/Layout';
 import Header from '@src/container/Home/Header';
 import Nav from '@src/container/Home/Nav';
-import { data } from 'pages/api/mock';
+import { data } from '@src/mock';
 
 const Home: NextPage = () => {
   const { links } = data;
