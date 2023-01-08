@@ -5,7 +5,7 @@ import { Avatar, Container, Typography } from '@mui/material';
 import { HeaderProps } from './props';
 import useStyles from './styles';
 
-const Header: FC<HeaderProps> = props => {
+export const Header: FC<HeaderProps> = props => {
   const { data } = props;
   const classes = useStyles();
 
@@ -20,5 +20,3 @@ const Header: FC<HeaderProps> = props => {
     </Container>
   );
 };
-
-export default Header;

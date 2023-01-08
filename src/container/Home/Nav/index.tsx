@@ -3,7 +3,7 @@ import { Button, Container } from '@mui/material';
 import { LinksProps } from './props';
 import useStyles from './styles';
 
-const Nav = (props: LinksProps) => {
+export const Nav = (props: LinksProps) => {
   const { links } = props;
   const classes = useStyles();
 
@@ -24,5 +24,3 @@ const Nav = (props: LinksProps) => {
     </Container>
   );
 };
-
-export default Nav;
