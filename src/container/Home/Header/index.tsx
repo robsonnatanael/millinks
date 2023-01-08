@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import Container from '@material-ui/core/Container';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
+import { FC } from 'react';
+
+import { Avatar, Container, Typography } from '@mui/material';
+
 import { HeaderProps } from './props';
 import useStyles from './styles';
 

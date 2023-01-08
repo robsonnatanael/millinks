@@ -1,6 +1,6 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material';
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     background: {
       default: '#FFF',
@@ -11,5 +11,3 @@ const theme = createTheme({
     fontSize: 14,
   },
 });
-
-export default theme;

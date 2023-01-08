@@ -1,14 +1,16 @@
-import GlobalStyle from '@src/styles/globals';
 import type { AppProps } from 'next/app';
-import { CssBaseline, ThemeProvider } from '@material-ui/core';
-import theme from '@src/theme';
+
+import { Global, ThemeProvider } from '@emotion/react';
+import { CssBaseline } from '@mui/material';
+import GlobalStyles from '@src/styles/globals';
+import { theme } from '@src/theme';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <Global styles={GlobalStyles} />
       <Component {...pageProps} />
-      <GlobalStyle />
     </ThemeProvider>
   );
 }
