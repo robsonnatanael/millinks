@@ -21,14 +21,14 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@mui/material": "^5.11.3",
+    "@mui/material": "^5.11.4",
     "@mui/styles": "^5.11.2",
     "next": "13.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.4.0",
+    "@commitlint/cli": "^17.4.1",
     "@commitlint/config-conventional": "^17.4.0",
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/git": "^10.0.1",
@@ -36,7 +36,7 @@
     "@types/react": "18.0.26",
     "@types/react-dom": "^18.0.10",
     "@types/styled-components": "^5.1.26",
-    "@typescript-eslint/parser": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.1",
     "eslint": "^8.31.0",
     "eslint-config-next": "^13.1.1",
     "eslint-config-prettier": "^8.6.0",
