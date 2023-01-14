@@ -1,4 +1,4 @@
-name: Releases
+name: releases
 
 on:
   push:
@@ -12,12 +12,12 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: "^16.10.0"
+          node-version: '18.x'
 
-      - name: Install dependencies
+      - name: install dependencies
         run: yarn install
 
-      - name: Run release
+      - name: run release
         run: yarn release
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
