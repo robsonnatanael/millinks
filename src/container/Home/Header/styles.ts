@@ -10,10 +10,10 @@ const useStyles = makeStyles(() => ({
   avatar: {
     display: 'flex',
     justifyContent: 'center',
+    marginBottom: 16,
   },
   title: {
     textAlign: 'center',
-    marginTop: '1rem',
   },
 }));
 
