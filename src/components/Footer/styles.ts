@@ -7,12 +7,12 @@ const useStyles = makeStyles(() => ({
     position: 'absolute',
     bottom: 0,
     display: 'flex',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   containerFooter: {
-    display: 'flex',
-    justifyContent: 'center',
     fontSize: 12,
+    maxWidth: 240,
   },
   link: {
     display: 'flex',
