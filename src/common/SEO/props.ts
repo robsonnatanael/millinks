@@ -1,9 +1,9 @@
-export type SEOProps = {
+export interface SEOProps {
   seo: SEO;
-};
+}
 
-type SEO = {
+interface SEO {
   title: string;
-  description: string;
-  keywords: string;
-};
+  metaDescription: string;
+  metaKeywords?: string;
+}

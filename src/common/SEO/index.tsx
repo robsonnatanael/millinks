@@ -1,11 +1,23 @@
+import { FC } from 'react';
+
 import Head from 'next/head';
 
 import { SEOProps } from './props';
 
-const SEO = (props: SEOProps) => {
-  const { title, description, keywords } = props.seo;
+/**
+ * For good indexing in search engines is recommended:
+ * @param title title maximum of 60 characters
+ * @param metaDescription maximum of 160 characters
+ */
 
-  const titleFormatted = title.length > 0 ? `${title} | Millinks` : 'Millinks';
+export const SEO: FC<SEOProps> = ({ seo }) => {
+  const { title, metaDescription, metaKeywords = '' } = seo;
+
+  const formattedTitle = title ? `${title} | Millinks` : 'Millinks';
+  const formattedDescription =
+    metaDescription && metaDescription.length > 160
+      ? metaDescription.slice(0, 157) + '...'
+      : metaDescription;
 
   return (
     <Head>
@@ -16,11 +28,11 @@ const SEO = (props: SEOProps) => {
         content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
       />
       <meta httpEquiv="Content-Language" content="pt-BR" />
-      <title>{titleFormatted}</title>
-      <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
+      <title>{formattedTitle}</title>
+      {formattedDescription && (
+        <meta name="description" content={formattedDescription} />
+      )}
+      {metaKeywords && <meta name="keywords" content={metaKeywords} />}
     </Head>
   );
 };
-
-export default SEO;
