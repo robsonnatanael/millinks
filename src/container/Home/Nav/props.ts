@@ -3,7 +3,8 @@ export type LinksProps = {
 };
 
 type link = {
-  id: number;
-  title: string;
+  id: string;
+  name: string;
   url: string;
+  active: boolean;
 };

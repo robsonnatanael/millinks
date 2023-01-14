@@ -2,13 +2,19 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(() => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
+    marginTop: 16,
+    '& a': {
+      textTransform: 'none',
+    },
+    '& a + a': {
+      marginTop: 16,
+    },
   },
 
   btnLink: {
-    margin: '10px 0',
-    textTransform: 'none',
+    width: '100%',
+    minWidth: 327,
+    height: 48,
   },
 }));
 
