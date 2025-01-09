@@ -8,6 +8,8 @@ type SEOProps = {
 const SEO = (props: SEOProps) => {
   const { title = '', description = '' } = props;
 
+  const pageTitle = title ? `${title} - Millinks` : 'Millinks';
+
   return (
     <Head>
       <meta name="keywords" content="links, rede social, perfil" />
@@ -17,9 +19,7 @@ const SEO = (props: SEOProps) => {
         content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
       />
       <meta httpEquiv="Content-Language" content="pt-br" />
-      <title>
-        {title} {title && '-'} Millinks
-      </title>
+      <title>{pageTitle}</title>
       <meta name="description" content={description} />
       <link rel="icon" href="/favicon.ico" />
     </Head>

@@ -1,5 +1,5 @@
-import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
+import { Button, Container } from '@mui/material';
+
 import { LinksProps } from './props';
 import useStyles from './styles';
 

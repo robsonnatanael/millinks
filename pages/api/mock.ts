@@ -6,11 +6,6 @@ export const data = {
   },
   links: [
     {
-      id: 1,
-      title: 'Meu Site',
-      url: 'https://www.robsonnatanael.com.br',
-    },
-    {
       id: 2,
       title: 'LinkedIn',
       url: 'https://bit.ly/linkedin-rn',
