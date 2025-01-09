@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '^22.12.0'
 
@@ -19,5 +19,27 @@ jobs:
 
       - name: Run release
         run: yarn release
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git for signing
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git config commit.gpgsign true
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import
+          gpg --list-keys
+
+      - name: Create a new branch
+        run: |
+          git checkout -b release-branch
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/robsonnatanael/millinks.git release-branch
+
+      - name: Create Pull Request
+        uses: actions/create-pull-request@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release-branch
+          base: main
+          title: 'Release: New version'
+          body: 'This pull request was created automatically by the CI/CD pipeline.'
