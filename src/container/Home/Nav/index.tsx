@@ -1,3 +1,4 @@
+'use client';
 import { Button, Container } from '@mui/material';
 
 import { LinksProps } from './props';
