@@ -1,3 +1,4 @@
+'use client';
 import { FC } from 'react';
 
 import { Avatar, Container, Typography } from '@mui/material';
