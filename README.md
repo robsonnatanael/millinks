@@ -23,9 +23,9 @@ Millinks é uma landing page, que possibilita a divulgação de conteúdo, atrav
 
 ## Tecnologias
 
-* Next.JS
-* TypeScript
-* Material UI
+- Next.JS
+- TypeScript
+- Material UI
 
 ## Licença
 
@@ -34,6 +34,7 @@ Este projeto está licenciado sob a licença MIT - consulte o arquivo [LICENSE.m
 ## Instalação
 
 Para que este rode em sua máquina, siga os passos abaixo:
+
 ```
 # Clone o repositório em alguma pasta em sua máquina
 $ git clone https://github.com/robsonnatanael/millinks
@@ -63,6 +64,7 @@ Conecte-se comigo
 
 [![Linkedin Badge](https://img.shields.io/badge/-Robson%20Natanael-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/robsonnatanael)](https://www.linkedin.com/in/robsonnatanael)
 [![Twitter Badge](https://img.shields.io/badge/-@robsonnatanael-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/robsonnatanael)](https://twitter.com/robsonnatanael)
-[![Rocketseat](https://img.shields.io/badge/-Rocketseat%20Profile-8358e1?style=flat-square&labelColor=8358e1&logoColor=white&link=https://app.rocketseat.com.br/me/robsonnatanael)](https://app.rocketseat.com.br/me/robsonnatanael)
+
+<!-- [![Rocketseat](https://img.shields.io/badge/-Rocketseat%20Profile-8358e1?style=flat-square&labelColor=8358e1&logoColor=white&link=https://app.rocketseat.com.br/me/robsonnatanael)](https://app.rocketseat.com.br/me/robsonnatanael) -->
 
 </div>
