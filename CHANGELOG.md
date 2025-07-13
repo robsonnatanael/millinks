@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/robsonnatanael/millinks/compare/v2.0.0...v2.0.1) (2025-07-13)
+
+
+### Bug Fixes
+
+* package.json & yarn.lock to reduce vulnerabilities ([#34](https://github.com/robsonnatanael/millinks/issues/34)) ([76aee67](https://github.com/robsonnatanael/millinks/commit/76aee67815f9fd02977623c89e5263a617a504b6))
+
 # [2.0.0](https://github.com/robsonnatanael/millinks/compare/v1.0.0...v2.0.0) (2025-03-18)
 
 
