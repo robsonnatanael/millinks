@@ -1,5 +1,5 @@
 # Building app
-FROM node:18.20.8-alpine AS builder
+FROM node:22.18.0-trixie-slim AS builder
 # default environments var
 ENV NODE_OPTIONS='--max_old_space_size=2048'
 # baisc config
@@ -14,7 +14,7 @@ COPY . /home/node/
 RUN yarn build
 
 # Bundler/Dist
-FROM node:18.20.8-alpine AS app-bundle
+FROM node:22.18.0-trixie-slim AS app-bundle
 # basic config
 USER node
 WORKDIR /home/node
@@ -27,7 +27,7 @@ COPY --from=builder /home/node/README.md /home/node/README.md
 COPY --from=builder /home/node/package.json /home/node/package.json
 
 # Starting webserver
-FROM node:18.20.8-alpine
+FROM node:22.18.0-trixie-slim
 # labels
 LABEL maintainer="robsonnatanael"
 LABEL context="landing-page"
