@@ -1,9 +1,8 @@
 # Building app
-FROM node:22.20.0-trixie-slim AS builder
+FROM node:24.12.0-alpine3.23 AS builder
 # default environments var
 ENV NODE_OPTIONS='--max_old_space_size=2048'
 # baisc config
-USER node
 WORKDIR /home/node
 # mount environment dist
 COPY package.json yarn.lock ./
@@ -14,9 +13,8 @@ COPY . /home/node/
 RUN yarn build
 
 # Bundler/Dist
-FROM node:22.20.0-trixie-slim AS app-bundle
+FROM node:24.12.0-alpine3.23 AS app-bundle
 # basic config
-USER node
 WORKDIR /home/node
 # create dist
 COPY --from=builder /home/node/.next /home/node/.next
@@ -27,7 +25,7 @@ COPY --from=builder /home/node/README.md /home/node/README.md
 COPY --from=builder /home/node/package.json /home/node/package.json
 
 # Starting webserver
-FROM node:22.20.0-trixie-slim
+FROM node:24.12.0-alpine3.23
 # labels
 LABEL maintainer="robsonnatanael"
 LABEL context="landing-page"
