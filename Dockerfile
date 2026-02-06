@@ -1,5 +1,5 @@
 # Building app
-FROM node:24.12.0-alpine3.23 AS builder
+FROM node:24.13.0-alpine3.23 AS builder
 # default environments var
 ENV NODE_OPTIONS='--max_old_space_size=2048'
 # baisc config
@@ -13,7 +13,7 @@ COPY . /home/node/
 RUN yarn build
 
 # Bundler/Dist
-FROM node:24.12.0-alpine3.23 AS app-bundle
+FROM node:24.13.0-alpine3.23 AS app-bundle
 # basic config
 WORKDIR /home/node
 # create dist
@@ -25,7 +25,7 @@ COPY --from=builder /home/node/README.md /home/node/README.md
 COPY --from=builder /home/node/package.json /home/node/package.json
 
 # Starting webserver
-FROM node:24.12.0-alpine3.23
+FROM node:24.13.0-alpine3.23
 # labels
 LABEL maintainer="robsonnatanael"
 LABEL context="landing-page"
