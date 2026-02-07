@@ -1,21 +1,35 @@
-'use client';
 import { FC } from 'react';
+import Image from 'next/image';
 
 import { Avatar, Container, Typography } from '@mui/material';
 
 import { HeaderProps } from './props';
-import useStyles from './styles';
 
 const Header: FC<HeaderProps> = props => {
   const { data } = props;
-  const classes = useStyles();
 
   return (
-    <Container maxWidth="sm" className={classes.root}>
-      <div className={classes.avatar}>
-        <Avatar src={data.page.avatar} sx={{ width: 96, height: 96 }} />
-      </div>
-      <Typography variant={'h4'} className={classes.title}>
+    <Container
+      maxWidth="sm"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        mt: '5rem',
+        mb: '1rem',
+      }}
+    >
+      <Avatar sx={{ width: 96, height: 96, position: 'relative' }}>
+        <Image
+          src={data.page.avatar}
+          alt={data.page.title}
+          fill
+          sizes="96px"
+          priority
+          style={{ objectFit: 'cover' }}
+        />
+      </Avatar>
+      <Typography variant="h4" sx={{ mt: '1rem', textAlign: 'center' }}>
         {data.page.title}
       </Typography>
     </Container>

@@ -1,32 +1,51 @@
-'use client';
 import Image from 'next/image';
 
-import { Container } from '@mui/material';
-
-import useStyles from './styles';
+import { Box, Container } from '@mui/material';
 
 const Footer = () => {
-  const classes = useStyles();
-
   return (
-    <footer className={classes.root}>
-      <Container className={classes.containerFooter}>
-        <a
+    <Box
+      component="footer"
+      sx={{
+        width: '100%',
+        height: '3rem',
+        position: 'absolute',
+        bottom: 0,
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      <Container
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          fontSize: 12,
+        }}
+      >
+        <Box
+          component="a"
           href="https://www.robsonnatanael.com.br"
           target="_blank"
           rel="noopener noreferrer"
-          className={classes.link}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            textDecoration: 'none',
+            color: 'inherit',
+          }}
         >
           Desenvolvido por
-          <Image
-            src="/assets/images/footer/logo-robson-natanael.svg"
-            alt="logo Robson Natanael"
-            width={84}
-            height={17}
-          />
-        </a>
+          <Box component="span" sx={{ ml: 1, display: 'flex' }}>
+            <Image
+              src="/assets/images/footer/logo-robson-natanael.svg"
+              alt="logo Robson Natanael"
+              width={84}
+              height={17}
+            />
+          </Box>
+        </Box>
       </Container>
-    </footer>
+    </Box>
   );
 };
 
