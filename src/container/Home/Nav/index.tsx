@@ -1,23 +1,31 @@
 'use client';
+
 import { Button, Container } from '@mui/material';
 
 import { LinksProps } from './props';
-import useStyles from './styles';
 
 const Nav = (props: LinksProps) => {
   const { links } = props;
-  const classes = useStyles();
 
   return (
-    <Container maxWidth="sm" className={classes.root}>
+    <Container
+      maxWidth="sm"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       {links.map(link => (
         <Button
-          className={classes.btnLink}
+          key={link.id}
+          href={link.url}
           size="large"
           variant="contained"
           color="primary"
-          key={link.id}
-          href={link.url}
+          sx={{
+            my: '10px',
+            textTransform: 'none',
+          }}
         >
           {link.title}
         </Button>

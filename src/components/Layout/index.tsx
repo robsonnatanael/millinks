@@ -1,12 +1,27 @@
+'use client';
+
 import { FC, memo } from 'react';
 
+import { Box } from '@mui/material';
+
 import { LayoutProps } from './props';
-import useStyles from './styles';
 
 const Layout: FC<LayoutProps> = ({ children }) => {
-  const classes = useStyles();
-
-  return <main className={classes.root}>{children}</main>;
+  return (
+    <Box
+      component="main"
+      sx={{
+        width: '100%',
+        minHeight: '100vh',
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        pb: '3rem',
+      }}
+    >
+      {children}
+    </Box>
+  );
 };
 
 export default memo(Layout);
