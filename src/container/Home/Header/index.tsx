@@ -1,5 +1,5 @@
-'use client';
 import { FC } from 'react';
+import Image from 'next/image';
 
 import { Avatar, Container, Typography } from '@mui/material';
 
@@ -19,7 +19,16 @@ const Header: FC<HeaderProps> = props => {
         mb: '1rem',
       }}
     >
-      <Avatar src={data.page.avatar} sx={{ width: 96, height: 96 }} />
+      <Avatar sx={{ width: 96, height: 96, position: 'relative' }}>
+        <Image
+          src={data.page.avatar}
+          alt={data.page.title}
+          fill
+          sizes="96px"
+          priority
+          style={{ objectFit: 'cover' }}
+        />
+      </Avatar>
       <Typography variant="h4" sx={{ mt: '1rem', textAlign: 'center' }}>
         {data.page.title}
       </Typography>

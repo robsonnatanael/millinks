@@ -1,6 +1,4 @@
-'use client';
-
-import { FC, memo } from 'react';
+import { FC } from 'react';
 
 import { Box } from '@mui/material';
 
@@ -24,4 +22,4 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   );
 };
 
-export default memo(Layout);
+export default Layout;
