@@ -1,0 +1,21 @@
+services:
+  app:
+    container_name: millinks_webapp
+    build:
+      context: ..
+      dockerfile: .docker/Dockerfile
+      args:
+        - TIME_ZONE=${TIME_ZONE:-UTC}
+        - API_CLIENT_ID=${API_CLIENT_ID}
+        - API_CLIENT_SECRET=${API_CLIENT_SECRET}
+        - API_BASE_URL=${API_BASE_URL}
+        - API_AUTH_URL=${API_AUTH_URL}
+        - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+    env_file:
+      - ../.env.local
+    volumes:
+      - '..:/home/node'
+      - '/home/node/node_modules'
+      - '/home/node/.next'
+    ports:
+      - '3000:3000'
