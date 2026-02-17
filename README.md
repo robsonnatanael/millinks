@@ -2,67 +2,48 @@
 	MilLinks
 </h1>
 
-<div aling="center" id="top">
+<p align="center">
+  <a href="doc/pt-br/README.md">Leia em Português</a> | 
+  <a href="doc/en/README.md">Documentation</a>
+</p>
 
+<div aling="center" id="top">
   <p align="center">
     <img alt="Version" src="https://img.shields.io/github/v/tag/robsonnatanael/millinks">
     <img alt="Stars" src="https://img.shields.io/github/stars/robsonnatanael/millinks">
     <img alt="Issues" src="https://img.shields.io/github/issues/robsonnatanael/millinks?logoColor=1DA1F2">
   </p>
-  <p align="center">
-    <a href="#sobre">Sobre</a> &#xa0; | &#xa0;
-    <a href="#tecnologias">Tecnologias</a> &#xa0; | &#xa0;
-    <a href="#instalação">Instalação</a> &#xa0; | &#xa0;
-    <a href="#badges" target="_blank">Badges</a>
-  </p>
 </div>
 
-## Sobre
+## Description
 
-Millinks é uma landing page, que possibilita a divulgação de conteúdo, através de um gerenciador de links que conecta seu público por meio de um único link divulgado nas redes sociais.
+**MilLinks** is a landing page designed for content distribution. It provides a link manager that connects your audience through a single, shared link on social media.
 
-## Tecnologias
+## Key Technologies
 
-- Next.JS
-- TypeScript
-- Material UI
+- **Next.JS**
+- **TypeScript**
+- **Material UI**
 
-## Licença
+## Getting Started
 
-Este projeto está licenciado sob a licença MIT - consulte o arquivo [LICENSE.md](https://opensource.org/licenses/MIT) para obter detalhes
+To install, configure, and run the project (including Docker instructions), please refer to our **[Documentation](doc/en/README.md)**.
 
-## Instalação
+## License
 
-Para que este rode em sua máquina, siga os passos abaixo:
+This project is licensed under the MIT License - see the [LICENSE.md](https://opensource.org/licenses/MIT) file for details.
 
-```
-# Clone o repositório em alguma pasta em sua máquina
-$ git clone https://github.com/robsonnatanael/millinks
+---
 
-# Entre no repositório
-$ cd millinks
+## Author
 
-# Instale as dependências digitando no terminal:
-$ yarn install
-
-# Rode a aplicação no modo de desenvolvimento.
-$ yarn dev
-
-# Abra http://localhost:3000 no seu navegador para visualizar o projeto
-```
-
-## Badges
-
-[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
-
-## Autor
-
-[Robson Natanael](https://github.com/robsonnatanael)
+**[Robson Natanael](https://github.com/robsonnatanael)**
 
 <div align="left">
-Conecte-se comigo
+Connect with me
 
 [![Linkedin Badge](https://img.shields.io/badge/-Robson%20Natanael-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/robsonnatanael)](https://www.linkedin.com/in/robsonnatanael)
 [![Twitter Badge](https://img.shields.io/badge/-@robsonnatanael-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/robsonnatanael)](https://twitter.com/robsonnatanael)
-
 </div>
+
+[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
