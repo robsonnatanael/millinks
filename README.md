@@ -2,11 +2,6 @@
 	MilLinks
 </h1>
 
-<p align="center">
-  <a href="doc/pt-br/README.md">Leia em Português</a> | 
-  <a href="doc/en/README.md">Documentation</a>
-</p>
-
 <div aling="center" id="top">
   <p align="center">
     <img alt="Version" src="https://img.shields.io/github/v/tag/robsonnatanael/millinks">
@@ -14,6 +9,10 @@
     <img alt="Issues" src="https://img.shields.io/github/issues/robsonnatanael/millinks?logoColor=1DA1F2">
   </p>
 </div>
+
+<p align="center">
+  <a href="doc/en/README.md">Documentation</a>
+</p>
 
 ## Description
 
