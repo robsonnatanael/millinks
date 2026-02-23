@@ -37,28 +37,36 @@ $ yarn dev
 
 ## Execução com Docker
 
-Você pode rodar a aplicação usando Docker de duas formas:
-
-### 1. Usando Docker Compose
+Antes de iniciar os serviços, certifique-se de que a rede externa necessária já foi criada. Caso contrário, execute o comando:
 
 ```bash
-# Navegue até a pasta do docker
+$ docker network create --driver overlay --attachable traefik_traefik_proxy
+```
+
+Você pode rodar a aplicação utilizando Docker de duas formas:
+
+### 1. Utilizando Docker Compose
+
+Para subir a aplicação:
+
+```bash
+# Navegue até o diretório docker
 $ cd .docker
 
-# Suba o container
+# Inicialize os serviços
 $ docker-compose up -d --build
 ```
 
-### 2. Usando Docker CLI
+### 2. Utilizando Docker CLI
 
 Para construir a imagem manualmente a partir da raiz do projeto:
 
 ```bash
 # Build da imagem
-$ docker build -f .docker/Dockerfile -t millinks-app .
+$ docker build -f .docker/Dockerfile -t robsonnatanael/millinks-webapp:dev .
 
 # Rodar o container
-$ docker run -d -p 3000:3000 --name millinks-container --env-file .env.local millinks-app
+$ docker run -d -p 3000:3000 --name millinks_webapp --env-file .env.local --network traefik_traefik_proxy robsonnatanael/millinks-webapp:dev
 ```
 
 > **Nota:** Certifique-se de que o arquivo `.env.local` na raiz do projeto esteja configurado corretamente antes de iniciar.

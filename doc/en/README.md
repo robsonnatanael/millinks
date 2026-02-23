@@ -7,7 +7,7 @@ This document contains the installation, configuration, and execution instructio
 ## Prerequisites
 
 Before starting, ensure you have the following installed:
-- [Node.js](https://nodejs.org/) (Version specified in Dockerfile or package.json)
+- [Node.js](https://nodejs.org/)
 - [Yarn](https://yarnpkg.com/)
 - [Docker](https://www.docker.com/) (Optional, for containerized execution)
 
@@ -15,7 +15,7 @@ Before starting, ensure you have the following installed:
 
 ## Installation
 
-To run this on your machine, follow the steps below:
+To run this project on your local machine, follow the steps below:
 
 ```bash
 # Clone the repository
@@ -37,15 +37,23 @@ $ yarn dev
 
 ## Docker Execution
 
+Before starting your services, ensure the required external network has been created. If not, run the following command:
+
+```bash
+$ docker network create --driver overlay --attachable traefik_traefik_proxy
+```
+
 You can run the application using Docker in two ways:
 
 ### 1. Using Docker Compose
 
+To start the application:
+
 ```bash
-# Navigate to the docker folder
+# Navigate to the docker directory
 $ cd .docker
 
-# Start the container
+# Initialize services
 $ docker-compose up -d --build
 ```
 
@@ -55,10 +63,10 @@ To build the image manually from the project root:
 
 ```bash
 # Build the image
-$ docker build -f .docker/Dockerfile -t millinks-app .
+$ docker build -f .docker/Dockerfile -t robsonnatanael/millinks-webapp:dev .
 
 # Run the container
-$ docker run -d -p 3000:3000 --name millinks-container --env-file .env.local millinks-app
+$ docker run -d -p 3000:3000 --name millinks_webapp --env-file .env.local --network traefik_traefik_proxy robsonnatanael/millinks-webapp:dev
 ```
 
 > **Note:** Ensure your `.env.local` file is configured in the project root before starting.
@@ -68,3 +76,4 @@ $ docker run -d -p 3000:3000 --name millinks-container --env-file .env.local mil
 ## Architecture and Services
 
 - **[TokenService](./TokenService.md)**: Detailed documentation on the JWT authentication service for M2M communication.
+
