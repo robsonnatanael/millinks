@@ -1,6 +1,7 @@
 services:
   app:
     container_name: millinks_webapp
+    image: robsonnatanael/millinks-webapp:dev
     build:
       context: ..
       dockerfile: .docker/Dockerfile
@@ -19,3 +20,9 @@ services:
       - '/home/node/.next'
     ports:
       - '3000:3000'
+    networks:
+      - traefik_traefik_proxy
+
+networks:
+  traefik_traefik_proxy:
+    external: true
