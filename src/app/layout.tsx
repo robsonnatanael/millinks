@@ -4,6 +4,9 @@ import { Geist, Geist_Mono, Poppins } from 'next/font/google';
 import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 
 import './globals.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { QueryProvider } from '@/providers/query';
+import { ToastContainer } from 'react-toastify';
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
 
@@ -36,7 +39,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
       >
-        <ThemeRegistry>{children}</ThemeRegistry>
+        <QueryProvider>
+          <ThemeRegistry>{children}</ThemeRegistry>
+          <ToastContainer />
+        </QueryProvider>
       </body>
     </html>
   );
