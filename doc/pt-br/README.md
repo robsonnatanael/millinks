@@ -7,7 +7,7 @@ Este documento contém as instruções de instalação, configuração e execuç
 ## Pré-requisitos
 
 Antes de iniciar, certifique-se de ter instalado:
-- [Node.js](https://nodejs.org/)
+- [Node.js](https://nodejs.org/) (v24.13.0 ou superior)
 - [Yarn](https://yarnpkg.com/)
 - [Docker](https://www.docker.com/) (Opcional, para execução em containers)
 
@@ -31,6 +31,17 @@ $ yarn install
 $ yarn dev
 
 # Abra http://localhost:3000 no seu navegador
+```
+
+---
+
+## Configuração
+
+Antes de rodar a aplicação, crie um arquivo `.env.local` no diretório raiz e configure as seguintes variáveis de ambiente:
+
+```env
+API_BASE_URL=https://api.example.com
+API_AUTH_URL=/auth/local
 ```
 
 ---
@@ -73,6 +84,10 @@ $ docker run -d -p 3000:3000 --name millinks_webapp --env-file .env.local --netw
 
 ---
 
-## Arquitetura e Serviços
+## Arquitetura e Funcionalidades
 
+- **Autenticação**: Fluxo completo de login utilizando JWT, React Hook Form e Zod. ([Ver Documentação](./UserAuthentication.md))
+- **Proteção de Rotas**: Redirecionamento baseado em middleware para rotas protegidas como `/dashboard`.
+- **Gerenciamento de Estado**: TanStack Query (React Query) para busca e cache de dados de forma eficiente.
+- **Cliente API**: Cliente baseado em Axios para comunicação consistente com serviços.
 - **[TokenService](./TokenService.md)**: Documentação detalhada sobre o serviço de autenticação JWT para comunicação M2M.
