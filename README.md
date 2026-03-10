@@ -1,48 +1,77 @@
-<h1 align="center">
-	MilLinks
-</h1>
+# MilLinks
 
-<div aling="center" id="top">
-  <p align="center">
-    <img alt="Version" src="https://img.shields.io/github/v/tag/robsonnatanael/millinks">
-    <img alt="Stars" src="https://img.shields.io/github/stars/robsonnatanael/millinks">
-    <img alt="Issues" src="https://img.shields.io/github/issues/robsonnatanael/millinks?logoColor=1DA1F2">
-  </p>
+<div align="center">
+  <img src="documentation/static/img/logo.png" alt="MilLinks Logo" width="200" />
+  <h3>The Intelligent Link Hub</h3>
+  <p>A high-performance, scalable link aggregation platform built with modern web technologies.</p>
+
+  [![Version](https://img.shields.io/github/package-json/v/robsonnatanael/millinks)](https://github.com/robsonnatanael/millinks)
+  [![Stars](https://img.shields.io/github/stars/robsonnatanael/millinks)](https://github.com/robsonnatanael/millinks/stargazers)
+  [![Issues](https://img.shields.io/github/issues/robsonnatanael/millinks)](https://github.com/robsonnatanael/millinks/issues)
 </div>
-
-<p align="center">
-  <a href="doc/en/README.md">Documentation</a>
-</p>
-
-## Description
-
-**MilLinks** is a landing page designed for content distribution. It provides a link manager that connects your audience through a single, shared link on social media.
-
-## Key Technologies
-
-- **Next.JS**
-- **TypeScript**
-- **Material UI**
-
-## Getting Started
-
-To install, configure, and run the project (including Docker instructions), please refer to our **[Documentation](doc/en/README.md)**.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](https://opensource.org/licenses/MIT) file for details.
 
 ---
 
-## Author
+## 🚀 Overview
 
-**[Robson Natanael](https://github.com/robsonnatanael)**
+**MilLinks** is a professional-grade link management system designed to centralize a digital presence into a single, elegant interface. Built on top of **Next.js 16+** and **TypeScript**, it leverages advanced architectural patterns to ensure speed, security, and developer productivity.
 
-<div align="left">
-Connect with me
+The project is designed with a **Screaming Architecture**, prioritizing domain clarity and maintainability.
 
-[![Linkedin Badge](https://img.shields.io/badge/-Robson%20Natanael-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/robsonnatanael)](https://www.linkedin.com/in/robsonnatanael)
-[![Twitter Badge](https://img.shields.io/badge/-@robsonnatanael-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/robsonnatanael)](https://twitter.com/robsonnatanael)
-</div>
+Perfect for content creators, developers, and organizations looking for a customizable, self-hosted alternative to generic link services.
 
-[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+## 🛠 Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/) (App Router, Server Components)
+- **Language**: [TypeScript](https://www.typescriptlang.org/) (Strict mode)
+- **UI & Styling**: [Material UI (MUI)](https://mui.com/), [Emotion](https://emotion.sh/)
+- **Data Management**: [TanStack Query](https://tanstack.com/query) (v5), [Zod](https://zod.dev/)
+- **Architecture**: Modular Feature-based Architecture (Screaming Architecture)
+- **Infrastructure**: [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/)
+- **Documentation**: [Docusaurus](https://docusaurus.io/) (Multi-language support)
+
+## 🏗 Modular Architecture
+
+The project follows a **Feature-based Modular Structure**, separating concerns by domain. This ensures that the codebase remains maintainable as the project scales.
+
+- `src/features`: Domain-specific components, hooks, and logic.
+- `src/providers`: Application-wide context providers (MUI, React Query).
+- `src/services`: Decoupled API interaction layer.
+- `src/lib`: Core utilities (Auth Token Service, API Client).
+
+## 📖 Documentation
+
+MilLinks includes a professional documentation site built with Docusaurus, supporting **English** and **Portuguese (BR)**.
+
+### Accessing the Docs
+
+To view the documentation locally, ensure you have the dependencies installed and run:
+
+```bash
+# Start the English (default) documentation server
+yarn docs:dev
+
+# Start the Portuguese documentation server
+yarn docs:dev:pt
+```
+
+For more detailed guides on installation, architecture, and deployment, visit our **[Full Documentation Site](https://millinks.robsonnatanael.com.br/millinks-doc)**.
+
+## 🐳 Deployment
+
+MilLinks is containerized for seamless deployment. You can build and run the entire stack using Docker:
+
+```bash
+# Build and start services
+docker-compose up --build
+```
+
+## 🤝 Contributing
+
+We welcome technical contributions. Please read our **[Contributing Guidelines](https://millinks.robsonnatanael.com.br/millinks-doc/docs/contributing/contributing)** before submitting a Pull Request.
+
+---
+
+<p align="center">
+  Developed with ❤️ by <a href="https://github.com/robsonnatanael">Robson Natanael</a>
+</p>

@@ -1,6 +1,8 @@
-# Documentação da Classe TokenService
+---
+title: Token Service
+---
 
-[Read in English](../en/TokenService.md)
+# Classe TokenService
 
 A classe `TokenService` é responsável pelo gerenciamento centralizado de tokens de autenticação JWT para comunicação *Machine-to-Machine* (M2M) com a API backend. Ela implementa o padrão Singleton para garantir uma única instância do serviço em toda a aplicação e utiliza estratégias de cache para otimizar o desempenho e reduzir chamadas desnecessárias à API de autenticação.
 

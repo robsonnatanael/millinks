@@ -19,7 +19,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "docs:dev": "cd documentation && yarn start",
+    "docs:dev:pt": "cd documentation && yarn start --locale pt-br",
+    "docs:build": "cd documentation && yarn build",
+    "docs:serve": "cd documentation && yarn serve"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
