@@ -24,18 +24,23 @@ The documentation is designed to provide comprehensive technical guides, archite
 
 ## 💻 Local Development
 
-To run the documentation server locally, navigate to the project root and use the following commands:
+To run the documentation server locally, it is recommended to use the scripts defined in the project root:
 
 ```bash
-# Development (English)
+# Development (English) - Run from root
 yarn docs:dev
 
-# Development (Portuguese)
+# Development (Portuguese) - Run from root
 yarn docs:dev:pt
 
-# Production Build
+# Production Build - Run from root
 yarn docs:build
+
+# Serve Production Build - Run from root
+yarn docs:serve
 ```
+
+Alternatively, you can run them within this directory using standard Docusaurus commands (`yarn start`, `yarn build`, etc.).
 
 ## 🌐 Localization Workflow
 

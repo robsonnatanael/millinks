@@ -7,7 +7,19 @@ title: Executando localmente
 Após instalar as dependências, você pode iniciar o ambiente de desenvolvimento.
 
 ```bash
-npm run dev
+yarn dev
+```
+
+### Documentação
+
+Para executar o servidor de documentação:
+
+```bash
+# Inglês
+yarn docs:dev
+
+# Português
+yarn docs:dev:pt
 ```
 
 A aplicação estará disponível em:

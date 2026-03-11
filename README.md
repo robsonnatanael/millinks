@@ -39,6 +39,26 @@ The project follows a **Feature-based Modular Structure**, separating concerns b
 - `src/services`: Decoupled API interaction layer.
 - `src/lib`: Core utilities (Auth Token Service, API Client).
 
+## 📜 Available Scripts
+
+The project includes several scripts to manage development, building, and documentation:
+
+### Core Application
+- `yarn dev`: Starts the Next.js development server.
+- `yarn build`: Builds the application for production.
+- `yarn start`: Starts the production server after building.
+- `yarn lint`: Runs ESLint to check for code issues.
+- `yarn release`: Triggers the semantic release process.
+
+### Documentation
+- `yarn docs:dev`: Starts the Docusaurus development server (English).
+- `yarn docs:dev:pt`: Starts the Docusaurus development server (Portuguese BR).
+- `yarn docs:build`: Builds the static documentation site.
+- `yarn docs:serve`: Serves the built documentation site locally.
+
+### Automation
+- `yarn postinstall`: Automatically installs dependencies for the documentation project after the root dependencies are installed.
+
 ## 📖 Documentation
 
 MilLinks includes a professional documentation site built with Docusaurus, supporting **English** and **Portuguese (BR)**.
@@ -59,11 +79,30 @@ For more detailed guides on installation, architecture, and deployment, visit ou
 
 ## 🐳 Deployment
 
-MilLinks is containerized for seamless deployment. You can build and run the entire stack using Docker:
+MilLinks is containerized for seamless deployment using a multi-stage Docker build.
+
+### Using Docker Compose
+
+You can build and run both the web application and the documentation using Docker Compose:
 
 ```bash
-# Build and start services
-docker-compose up --build
+# Build and start services in background
+docker compose --env-file .env.local up -d --build
+```
+
+- **Web App**: Accessible at `http://localhost:3000`
+- **Documentation**: Accessible at `http://localhost:3001`
+
+### Using Docker Directly
+
+If you prefer to build the images manually:
+
+```bash
+# Build the Web App image
+docker build --target app -t millinks-webapp .
+
+# Build the Documentation image
+docker build --target docs -t millinks-docs .
 ```
 
 ## 🤝 Contributing

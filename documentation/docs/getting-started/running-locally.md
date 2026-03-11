@@ -3,7 +3,19 @@
 After installing the dependencies, you can start the development environment.
 
 ```bash
-npm run dev
+yarn dev
+```
+
+### Documentation
+
+To run the documentation server:
+
+```bash
+# English
+yarn docs:dev
+
+# Portuguese
+yarn docs:dev:pt
 ```
 
 The application will be available at:

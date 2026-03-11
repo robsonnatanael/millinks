@@ -22,6 +22,8 @@ millinks/
 │ └── proxy.ts          # Lógica de Middleware/Proxy
 │
 ├── documentation/      # Documentação Docusaurus
+├── Dockerfile          # Build Docker multi-stage
+├── docker-compose.yml  # Orquestração de serviços
 ├── package.json
 └── next.config.ts
 ```
