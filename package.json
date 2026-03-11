@@ -23,7 +23,8 @@
     "docs:dev": "cd documentation && yarn start",
     "docs:dev:pt": "cd documentation && yarn start --locale pt-br",
     "docs:build": "cd documentation && yarn build",
-    "docs:serve": "cd documentation && yarn serve"
+    "docs:serve": "cd documentation && yarn serve",
+    "postinstall": "[ -d documentation ] && cd documentation && yarn install || true"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
