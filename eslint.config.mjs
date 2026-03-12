@@ -1,15 +1,12 @@
-import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
-import nextTypescript from "eslint-config-next/typescript";
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { defineConfig } from "eslint/config";
+import globals from "globals";
+import js from "@eslint/js";
+import tseslint from "typescript-eslint";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
-const eslintConfig = [
-  ...nextCoreWebVitals,
-  ...nextTypescript,
-  { ignores: ['node_modules', '.next', '/*.js'] }
-];
-
-export default eslintConfig;
+export default defineConfig([
+  { files: ["**/*.{js,mjs,cjs,ts}"] },
+  { files: ["**/*.{js,mjs,cjs,ts}"], languageOptions: { globals: globals.browser } },
+  { files: ["**/*.{js,mjs,cjs,ts}"], plugins: { js }, extends: ["js/recommended"] },
+  tseslint.configs.recommended,
+]);
