@@ -5,9 +5,10 @@
   <h3>The Intelligent Link Hub</h3>
   <p>A high-performance, scalable link aggregation platform built with modern web technologies.</p>
 
-  [![Version](https://img.shields.io/github/package-json/v/robsonnatanael/millinks)](https://github.com/robsonnatanael/millinks)
-  [![Stars](https://img.shields.io/github/stars/robsonnatanael/millinks)](https://github.com/robsonnatanael/millinks/stargazers)
-  [![Issues](https://img.shields.io/github/issues/robsonnatanael/millinks)](https://github.com/robsonnatanael/millinks/issues)
+[![Version](https://img.shields.io/github/package-json/v/robsonnatanael/millinks)](https://github.com/robsonnatanael/millinks)
+[![Stars](https://img.shields.io/github/stars/robsonnatanael/millinks)](https://github.com/robsonnatanael/millinks/stargazers)
+[![Issues](https://img.shields.io/github/issues/robsonnatanael/millinks)](https://github.com/robsonnatanael/millinks/issues)
+
 </div>
 
 ---
@@ -20,7 +21,7 @@ The project is designed with a **Screaming Architecture**, prioritizing domain c
 
 Perfect for content creators, developers, and organizations looking for a customizable, self-hosted alternative to generic link services.
 
-## 🛠 Tech Stack
+## 🛠️ Tech Stack
 
 - **Framework**: [Next.js](https://nextjs.org/) (App Router, Server Components)
 - **Language**: [TypeScript](https://www.typescriptlang.org/) (Strict mode)
@@ -30,7 +31,7 @@ Perfect for content creators, developers, and organizations looking for a custom
 - **Infrastructure**: [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/)
 - **Documentation**: [Docusaurus](https://docusaurus.io/) (Multi-language support)
 
-## 🏗 Modular Architecture
+## 🏗️ Modular Architecture
 
 The project follows a **Feature-based Modular Structure**, separating concerns by domain. This ensures that the codebase remains maintainable as the project scales.
 
@@ -44,6 +45,7 @@ The project follows a **Feature-based Modular Structure**, separating concerns b
 The project includes several scripts to manage development, building, and documentation:
 
 ### Core Application
+
 - `yarn dev`: Starts the Next.js development server.
 - `yarn build`: Builds the application for production.
 - `yarn start`: Starts the production server after building.
@@ -51,12 +53,14 @@ The project includes several scripts to manage development, building, and docume
 - `yarn release`: Triggers the semantic release process.
 
 ### Documentation
+
 - `yarn docs:dev`: Starts the Docusaurus development server (English).
 - `yarn docs:dev:pt`: Starts the Docusaurus development server (Portuguese BR).
 - `yarn docs:build`: Builds the static documentation site.
 - `yarn docs:serve`: Serves the built documentation site locally.
 
 ### Automation
+
 - `yarn postinstall`: Automatically installs dependencies for the documentation project after the root dependencies are installed.
 
 ## 📖 Documentation
