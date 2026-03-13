@@ -12,7 +12,7 @@ A forma recomendada para implantação é o uso do **Docker**. Isso garante que 
 
 ## Conteinerização vs. Orquestração
 
-Separamos as preocupações entre *construir* a aplicação e *executá-la* em um ambiente multi-serviço.
+Separamos as preocupações entre _construir_ a aplicação e _executá-la_ em um ambiente multi-serviço.
 
 1.  **[Conteinerização (Docker)](./docker.md)**: Imagens de serviços individuais e o processo de build.
 2.  **[Orquestração (Docker Compose)](./docker-compose.md)**: Executando toda a stack (web, banco de dados, proxy) em conjunto.

@@ -12,14 +12,14 @@ A habilidade de **Gerenciamento de Documentação** fornece uma estrutura abrang
 
 A documentação DEVE seguir estas regras fundamentais:
 
-1.  **Separação de Preocupações (SoC)**: 
-    *   **Guias Estratégicos**: Focados em "Por quê" e "O quê" (conceitos, padrões).
-    *   **Guias Técnicos**: Focados em "Como" (comandos, configurações).
+1.  **Separação de Preocupações (SoC)**:
+    - **Guias Estratégicos**: Focados em "Por quê" e "O quê" (conceitos, padrões).
+    - **Guias Técnicos**: Focados em "Como" (comandos, configurações).
 2.  **Screaming Architecture**: As estruturas de pastas devem refletir funcionalidades (ex: `core-services/`, `architecture/`).
 3.  **Paridade de Idioma**: Cada documento em Inglês (`docs/`) DEVE ter uma versão correspondente em Português (`i18n/pt-br/...`).
 4.  **Estética Premium**:
-    *   **Cores**: Azul (`#0077b6`) e Ciano (`#00b4d8`).
-    *   **Imagens**: Use ilustrações geradas por IA modernas e tecnológicas (PNG) para as funcionalidades.
+    - **Cores**: Azul (`#0077b6`) e Ciano (`#00b4d8`).
+    - **Imagens**: Use ilustrações geradas por IA modernas e tecnológicas (PNG) para as funcionalidades.
 
 ## 📂 Estrutura de Diretórios
 
@@ -42,6 +42,7 @@ documentation/
 ## 🔄 Fluxos de Trabalho do Ciclo de Vida
 
 ### 1. Adicionando Novo Conteúdo
+
 1.  Adicione o arquivo Markdown em Inglês em `documentation/docs/<domínio>/<nome-do-arquivo>.md`.
 2.  Adicione a tradução em Português em `documentation/i18n/pt-br/docusaurus-plugin-content-docs/current/<domínio>/<nome-do-arquivo>.md`.
 3.  Garanta que AMBOS os arquivos tenham **id**, **title** e **slug** consistentes no frontmatter.
@@ -49,25 +50,27 @@ documentation/
 5.  **Importante**: Para links internos, SEMPRE use caminhos relativos ao arquivo Markdown (ex: `[rótulo](./outro-doc.md)`). EVITE URLs baseadas em caminho (ex: `/docs/categoria/doc`).
 
 ### 2. Manutenção da Barra Lateral
-*   A barra lateral usa mapeamento manual.
-*   Sempre agrupe itens relacionados em categorias.
-*   Se uma categoria for adicionada, extraia as traduções usando:
-    ```bash
-    cd documentation && yarn write-translations --locale pt-br
-    ```
+
+- A barra lateral usa mapeamento manual.
+- Sempre agrupe itens relacionados em categorias.
+- Se uma categoria for adicionada, extraia as traduções usando:
+  ```bash
+  cd documentation && yarn write-translations --locale pt-br
+  ```
 
 ### 3. Localização (i18n)
-*   Traduza as strings da UI em `documentation/i18n/pt-br/code.json`.
-*   Traduza os rótulos da barra lateral em `documentation/i18n/pt-br/docusaurus-plugin-content-docs/current.json`.
+
+- Traduza as strings da UI em `documentation/i18n/pt-br/code.json`.
+- Traduza os rótulos da barra lateral em `documentation/i18n/pt-br/docusaurus-plugin-content-docs/current.json`.
 
 ## 🛠 Comandos Necessários
 
-| Tarefa | Comando |
-| :--- | :--- |
-| **Executar Docs EN** | `yarn docs:dev` |
-| **Executar Docs PT** | `yarn docs:dev:pt` |
-| **Compilar (Build) Docs** | `yarn docs:build` |
-| **Extrair i18n** | `cd documentation && yarn write-translations --locale pt-br` |
+| Tarefa                    | Comando                                                      |
+| :------------------------ | :----------------------------------------------------------- |
+| **Executar Docs EN**      | `yarn docs:dev`                                              |
+| **Executar Docs PT**      | `yarn docs:dev:pt`                                           |
+| **Compilar (Build) Docs** | `yarn docs:build`                                            |
+| **Extrair i18n**          | `cd documentation && yarn write-translations --locale pt-br` |
 
 ## 🧪 Check-list de Validação
 

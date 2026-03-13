@@ -13,7 +13,7 @@ The recommended way to deploy is using **Docker**. This ensures that the applica
 
 ## Containerization vs. Orchestration
 
-We separate the concerns of *building* the application and *running* it in a multi-service environment.
+We separate the concerns of _building_ the application and _running_ it in a multi-service environment.
 
 1.  **[Containerization (Docker)](./docker.md)**: Individual service images and build process.
 2.  **[Orchestration (Docker Compose)](./docker-compose.md)**: Running the full stack (web, database, proxy) together.

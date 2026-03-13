@@ -12,10 +12,12 @@ export default async function Home() {
   const revalidateTime = 60 * 5; // 5 minutos
 
   try {
-    const response = await apiFetch<Linktree>('/linktrees', { next: { revalidate: revalidateTime } });
+    const response = await apiFetch<Linktree>('/linktrees', {
+      next: { revalidate: revalidateTime },
+    });
     navLinks = response.data;
   } catch (error) {
-    logger.error("Falha ao carregar linktrees da API.", error);
+    logger.error('Falha ao carregar linktrees da API.', error);
   }
 
   return (

@@ -6,16 +6,13 @@ export default {
       label: 'Getting Started',
       items: [
         'getting-started/installation',
-        'getting-started/running-locally'
-      ]
+        'getting-started/running-locally',
+      ],
     },
     {
       type: 'category',
       label: 'Configuration',
-      items: [
-        'configuration/environment-variables',
-        'configuration/agents'
-      ]
+      items: ['configuration/environment-variables', 'configuration/agents'],
     },
     {
       type: 'category',
@@ -28,18 +25,15 @@ export default {
           label: 'Core Services',
           items: [
             'core-services/TokenService',
-            'core-services/UserAuthentication'
-          ]
+            'core-services/UserAuthentication',
+          ],
         },
-      ]
+      ],
     },
     {
       type: 'category',
       label: 'Project Skills',
-      items: [
-        'skills/overview',
-        'skills/documentation-management',
-      ]
+      items: ['skills/overview', 'skills/documentation-management'],
     },
     {
       type: 'category',
@@ -48,15 +42,12 @@ export default {
         'deployment/deployment-guide',
         'deployment/docker',
         'deployment/docker-compose',
-      ]
+      ],
     },
     {
       type: 'category',
       label: 'Contributing',
-      items: [
-        'contributing/contributing',
-        'contributing/localization',
-      ]
+      items: ['contributing/contributing', 'contributing/localization'],
     },
     'project-info',
   ],

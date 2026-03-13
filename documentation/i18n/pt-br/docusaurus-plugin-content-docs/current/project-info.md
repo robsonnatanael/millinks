@@ -15,8 +15,6 @@ A versão atual do **MilLinks** é **{pkg.version}**.
 
 Todas as mudanças notáveis neste projeto são documentadas no **Changelog**.
 
-
-
 ## Detalhes do Changelog
 
 <Changelog />
