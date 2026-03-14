@@ -6,13 +6,14 @@ import Footer from '@/components/Footer';
 import { apiFetch } from '@/lib/api-client';
 import { Linktree } from '@/@types/api';
 import { logger } from '@/lib/logger';
+import { ENDPOINTS } from '@/shared/utils/endpoints';
 
 export default async function Home() {
   let navLinks = data.links;
-  const revalidateTime = 60 * 5; // 5 minutos
+  const revalidateTime = 60 * 5;
 
   try {
-    const response = await apiFetch<Linktree>('/linktrees', {
+    const response = await apiFetch<Linktree>(ENDPOINTS.LINKTREES, {
       next: { revalidate: revalidateTime },
     });
     navLinks = response.data;
