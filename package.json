@@ -48,7 +48,8 @@
     "react-hook-form": "^7.71.2",
     "react-toastify": "^11.0.5",
     "tailwind-merge": "^3.5.0",
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "zustand": "^5.0.11"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.4.2",
@@ -56,6 +57,7 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@tailwindcss/postcss": "^4.1.18",
+    "@tanstack/react-query-devtools": "^5.91.3",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^25.0.2",
     "@types/react": "19.2.7",
