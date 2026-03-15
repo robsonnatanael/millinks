@@ -11,4 +11,5 @@ const initialWhoami: Whoami = {
 export const useWhoamiStore = create<WhoamiStore>(set => ({
   whoami: initialWhoami,
   setWhoamiStore: whoami => set({ whoami }),
+  clearWhoamiStore: () => set({ whoami: initialWhoami }),
 }));

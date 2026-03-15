@@ -8,6 +8,7 @@ export type Whoami = {
 export type WhoamiStore = {
   whoami: Whoami;
   setWhoamiStore: (whoami: Whoami) => void;
+  clearWhoamiStore: () => void;
 };
 
 export type WhoamiResponse = {
