@@ -4,6 +4,7 @@ import { isAxiosError } from 'axios';
 import Cookies from 'js-cookie';
 import { DEFAULT_VALUES } from '@/shared/utils/default-values';
 import { logger } from '@/lib/logger';
+import { AUTH_MESSAGES } from '../utils/messages';
 
 export const loginRequest = async ({ email, password }: LoginRequestProps) => {
   const API_AUTH_URL = `${process.env.API_AUTH_URL}`;
@@ -19,7 +20,7 @@ export const loginRequest = async ({ email, password }: LoginRequestProps) => {
   } catch (error) {
     if (isAxiosError(error)) {
       const axiosError = error.response?.data?.error?.message;
-      logger.error('Error message:', axiosError);
+      logger.error(AUTH_MESSAGES.ERROR_MESSAGE, axiosError);
     }
 
     throw error;

@@ -12,6 +12,8 @@ import {
   FieldGroup,
   FieldLabel,
 } from '@/shared/components/ui/field';
+import Link from 'next/link';
+import { PUBLIC_ROUTE } from '@/shared/routes';
 
 export const LoginForm: FC = (className, ...props) => {
   const { errors, isValid, handleSubmit, onSubmit, register } = useLoginForm();
@@ -41,12 +43,12 @@ export const LoginForm: FC = (className, ...props) => {
               <Field>
                 <div className="flex items-center">
                   <FieldLabel htmlFor="password">Senha</FieldLabel>
-                  <a
-                    href="#"
+                  <Link
+                    href={PUBLIC_ROUTE.PASSWORD_RECOVERY}
                     className="ml-auto text-sm underline-offset-4 hover:underline"
                   >
                     Esqueceu sua senha?
-                  </a>
+                  </Link>
                 </div>
                 <Input
                   id="password"
@@ -66,7 +68,8 @@ export const LoginForm: FC = (className, ...props) => {
                   Entrar
                 </Button>
                 <FieldDescription className="text-center">
-                  Não tem uma conta? <a href="#">Cadastre-se</a>
+                  Não tem uma conta?{' '}
+                  <Link href={PUBLIC_ROUTE.REGISTER}>Cadastre-se</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
