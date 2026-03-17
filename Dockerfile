@@ -12,11 +12,13 @@ ARG API_CLIENT_ID
 ARG API_CLIENT_SECRET
 ARG NEXT_PUBLIC_API_BASE_URL
 ARG NEXT_PUBLIC_API_AUTH_URL
+ARG NEXT_PUBLIC_BASE_PATH
 
 ENV API_CLIENT_ID=$API_CLIENT_ID
 ENV API_CLIENT_SECRET=$API_CLIENT_SECRET
 ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
 ENV NEXT_PUBLIC_API_AUTH_URL=$NEXT_PUBLIC_API_AUTH_URL
+ENV NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH
 
 # basic config
 WORKDIR /home/node
@@ -41,6 +43,7 @@ WORKDIR /home/node
 COPY --from=app-builder /home/node/.next /home/node/.next
 COPY --from=app-builder /home/node/node_modules /home/node/node_modules
 COPY --from=app-builder /home/node/public /home/node/public
+COPY --from=app-builder /home/node/next.config.ts /home/node/next.config.ts
 COPY --from=app-builder /home/node/LICENSE /home/node/LICENSE
 COPY --from=app-builder /home/node/README.md /home/node/README.md
 COPY --from=app-builder /home/node/package.json /home/node/package.json
@@ -61,12 +64,14 @@ ARG API_CLIENT_ID
 ARG API_CLIENT_SECRET
 ARG NEXT_PUBLIC_API_BASE_URL
 ARG NEXT_PUBLIC_API_AUTH_URL
+ARG NEXT_PUBLIC_BASE_PATH
 
 ENV TZ=$TIME_ZONE
 ENV API_CLIENT_ID=$API_CLIENT_ID
 ENV API_CLIENT_SECRET=$API_CLIENT_SECRET
 ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
 ENV NEXT_PUBLIC_API_AUTH_URL=$NEXT_PUBLIC_API_AUTH_URL
+ENV NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH
 
 # basic config
 RUN apk add --no-cache tzdata
@@ -113,6 +118,9 @@ RUN yarn build
 # [Stage 2/2] serving documentation
 FROM nginx:1.27-alpine AS docs
 
+# Disable absolute redirects to prevent Nginx from changing HTTPS to HTTP in slash redirects
+RUN sed -i 's/http {/http {\n    absolute_redirect off;/' /etc/nginx/nginx.conf
+
 # labels
 LABEL maintainer="millinks"
 LABEL context="documentation"
@@ -121,7 +129,7 @@ LABEL "website.name"="MilLinks Doc"
 LABEL "website.url"="https://doc.millinks.com.br"
 
 # copy built site to nginx
-COPY --from=docs-builder /home/node/documentation/build /usr/share/nginx/html
+COPY --from=docs-builder /home/node/documentation/build /usr/share/nginx/html/millinks-docs
 
 EXPOSE 80
 

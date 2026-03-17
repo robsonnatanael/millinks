@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { Box, Container } from '@mui/material';
 
 const Footer = () => {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
   return (
     <Box
       component="footer"
@@ -37,7 +39,7 @@ const Footer = () => {
           Desenvolvido por
           <Box component="span" sx={{ ml: 1, display: 'flex' }}>
             <Image
-              src="/assets/images/footer/logo-robson-natanael.svg"
+              src={`${basePath}/assets/images/footer/logo-robson-natanael.svg`}
               alt="logo Robson Natanael"
               width={84}
               height={17}

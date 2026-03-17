@@ -6,6 +6,7 @@ import { isTokenValid } from '@/features/auth';
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const url = request.nextUrl.clone();
   const tokenValue = request.cookies.get(DEFAULT_VALUES.COOKIE_KEY)?.value;
   const hasValidToken = isTokenValid(tokenValue);
 
@@ -14,11 +15,13 @@ export function proxy(request: NextRequest) {
   );
 
   if (isPrivateRoute && !hasValidToken) {
-    return NextResponse.redirect(new URL(PUBLIC_ROUTE.LOGIN, request.url));
+    url.pathname = PUBLIC_ROUTE.LOGIN;
+    return NextResponse.redirect(url);
   }
 
   if (pathname.startsWith(PUBLIC_ROUTE.LOGIN) && hasValidToken) {
-    return NextResponse.redirect(new URL(PRIVATE_ROUTE.DASHBOARD, request.url));
+    url.pathname = PRIVATE_ROUTE.DASHBOARD;
+    return NextResponse.redirect(url);
   }
 
   return NextResponse.next();
