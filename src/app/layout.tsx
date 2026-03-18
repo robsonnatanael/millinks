@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Poppins } from 'next/font/google';
 import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 
 import './globals.css';
+import { GoogleAnalytics } from '@/core/web-analytics/google-analytics';
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR">
+      <GoogleAnalytics />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
       >
