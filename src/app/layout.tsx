@@ -7,6 +7,7 @@ import './globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryProvider } from '@/providers/query';
 import { ToastContainer } from 'react-toastify';
+import { GoogleAnalytics } from '@/core/web-analytics/google-analytics';
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
 
@@ -36,6 +37,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR">
+      <GoogleAnalytics />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
       >
