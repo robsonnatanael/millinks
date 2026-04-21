@@ -8,6 +8,8 @@ import { HeaderProps } from './props';
 const Header: FC<HeaderProps> = props => {
   const { data } = props;
 
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
   return (
     <Container
       maxWidth="sm"
@@ -21,7 +23,7 @@ const Header: FC<HeaderProps> = props => {
     >
       <Avatar sx={{ width: 96, height: 96, position: 'relative' }}>
         <Image
-          src={data.page.avatar}
+          src={`${basePath}${data.page.avatar}`}
           alt={data.page.title}
           fill
           sizes="96px"

@@ -1,11 +1,40 @@
 services:
   app:
-    container_name: millinks
+    container_name: millinks_webapp
+    image: millinks/millinks-webapp:dev
     build:
       context: .
       dockerfile: Dockerfile
+      target: app
+      args:
+        - TIME_ZONE=${TIME_ZONE:-UTC}
+        - API_CLIENT_ID=${API_CLIENT_ID}
+        - API_CLIENT_SECRET=${API_CLIENT_SECRET}
+        - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+        - NEXT_PUBLIC_API_AUTH_URL=${NEXT_PUBLIC_API_AUTH_URL}
+    env_file:
+      - .env.local
     volumes:
-      - '.:/app'
-      - '/app/node_modules'
+      - '.:/home/node'
+      - '/home/node/node_modules'
+      - '/home/node/.next'
     ports:
       - '3000:3000'
+    networks:
+      - network
+
+  docs:
+    container_name: millinks_docs
+    image: millinks/millinks-docs:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: docs
+    ports:
+      - '3001:80'
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge

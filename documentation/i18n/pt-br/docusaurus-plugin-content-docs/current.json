@@ -1,0 +1,38 @@
+{
+  "version.label": {
+    "message": "Atual",
+    "description": "The label for version current"
+  },
+  "sidebar.docSidebar.category.Getting Started": {
+    "message": "Começando",
+    "description": "The label for category 'Getting Started' in sidebar 'docSidebar'"
+  },
+  "sidebar.docSidebar.category.Configuration": {
+    "message": "Configuração",
+    "description": "The label for category 'Configuration' in sidebar 'docSidebar'"
+  },
+  "sidebar.docSidebar.category.Architecture": {
+    "message": "Arquitetura",
+    "description": "The label for category 'Architecture' in sidebar 'docSidebar'"
+  },
+  "sidebar.docSidebar.category.Architecture.category.Core Services": {
+    "message": "Serviços Core",
+    "description": "The label for category 'Core Services' in sidebar 'docSidebar'"
+  },
+  "sidebar.docSidebar.category.Project Skills": {
+    "message": "Habilidades do Projeto",
+    "description": "The label for category 'Project Skills' in sidebar 'docSidebar'"
+  },
+  "sidebar.docSidebar.category.Deployment": {
+    "message": "Implantação",
+    "description": "The label for category 'Deployment' in sidebar 'docSidebar'"
+  },
+  "sidebar.docSidebar.category.Contributing": {
+    "message": "Contribuindo",
+    "description": "The label for category 'Contributing' in sidebar 'docSidebar'"
+  },
+  "sidebar.docSidebar.link.Changelog": {
+    "message": "Histórico de Alterações (Changelog)",
+    "description": "The label for link 'Changelog' in sidebar 'docSidebar'"
+  }
+}

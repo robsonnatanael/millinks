@@ -1,0 +1,22 @@
+{
+  "title": {
+    "message": "MilLinks",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "MilLinks Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Documentation": {
+    "message": "Documentação",
+    "description": "Navbar item with label Documentation"
+  },
+  "item.label.Official Site": {
+    "message": "Site Oficial",
+    "description": "Navbar item with label Official Site"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}

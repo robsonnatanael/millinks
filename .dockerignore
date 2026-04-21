@@ -6,6 +6,7 @@
 .vscode/
 node_modules/
 out/
+skill/
 
 # Files Configs
 .dockerignore
@@ -18,9 +19,11 @@ out/
 .prettierignore
 .prettierrc.json
 .releaserc.json
-CHANGELOG.md
 commitlint.config.js
 docker-compose.yml
 Dockerfile
+
+# Files Markdown
 *.md
 !README.md
+!CHANGELOG.md
