@@ -99,14 +99,48 @@ docker compose --env-file .env.local up -d --build
 
 ### Using Docker Directly
 
-If you prefer to build the images manually:
+To build the image manually and securely, we use **Docker BuildKit Secrets**. This prevents sensitive information from being stored in the image history.
+
+#### 1. Build the Web App
+
+Choose the command based on your environment. These commands pass your `.env` file as a secret mount:
+
+**Staging:**
+```bash
+docker build --target app -t my-org/millinks-webapp:staging \
+  --secret id=millinks_stg_webapp_env,src=.env.stg .
+```
+
+**Production:**
+```bash
+docker build --target app -t my-org/millinks-webapp:latest \
+  --secret id=millinks_webapp_env,src=.env.prod .
+```
+
+#### 2. Run the Container
+
+Pass the corresponding `.env` file at runtime:
+
+**Staging:**
+```bash
+docker run -dp 3000:3000 --name millinks-stg-webapp --env-file .env.stg my-org/millinks-webapp:staging
+```
+
+**Production:**
+```bash
+docker run -dp 3000:3000 --name millinks-webapp --env-file .env.prod my-org/millinks-webapp:latest
+```
+
+#### 3. Documentation (Optional)
+
+To build and run the documentation server:
 
 ```bash
-# Build the Web App image
-docker build --target app -t millinks-webapp .
+# Build
+docker build --target docs -t my-org/millinks-docs .
 
-# Build the Documentation image
-docker build --target docs -t millinks-docs .
+# Run
+docker run -dp 3001:80 --name millinks-docs my-org/millinks-docs
 ```
 
 ## 🤝 Contributing

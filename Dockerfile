@@ -2,84 +2,62 @@
 ## APP STAGES
 ## ==========================================
 
+ARG NODE_IMAGE=node:24.15.0-alpine3.22
+
 # [Stage 1/3] building app
-FROM node:24.13.0-alpine3.23 AS app-builder
+FROM ${NODE_IMAGE} AS app-builder
 
 # default environments var
 ENV NODE_OPTIONS='--max_old_space_size=2048'
 
-ARG API_CLIENT_ID
-ARG API_CLIENT_SECRET
-ARG NEXT_PUBLIC_API_BASE_URL
-ARG NEXT_PUBLIC_API_AUTH_URL
-ARG NEXT_PUBLIC_BASE_PATH
-
-ENV API_CLIENT_ID=$API_CLIENT_ID
-ENV API_CLIENT_SECRET=$API_CLIENT_SECRET
-ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
-ENV NEXT_PUBLIC_API_AUTH_URL=$NEXT_PUBLIC_API_AUTH_URL
-ENV NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH
-
 # basic config
-WORKDIR /home/node
+WORKDIR /app
 
-# mount environment dist
+# mount dependencies
 COPY package.json yarn.lock ./
-
-# install dependencies
 RUN yarn --frozen-lockfile
-COPY . /home/node/
+COPY . /app/
 
-# build
-RUN yarn build
+# build using secrets (Staging or Production)
+RUN --mount=type=secret,id=millinks_stg_webapp_env \
+    --mount=type=secret,id=millinks_webapp_env \
+    if [ -f /run/secrets/millinks_stg_webapp_env ]; then \
+        export $(grep -v '^#' /run/secrets/millinks_stg_webapp_env | xargs); \
+    elif [ -f /run/secrets/millinks_webapp_env ]; then \
+        export $(grep -v '^#' /run/secrets/millinks_webapp_env | xargs); \
+    fi && \
+    yarn build
 
 # [Stage 2/3] bundler/dist
-FROM node:24.13.0-alpine3.23 AS app-bundle
+FROM ${NODE_IMAGE} AS app-bundle
 
 # basic config
-WORKDIR /home/node
+WORKDIR /app
 
 # create dist
-COPY --from=app-builder /home/node/.next /home/node/.next
-COPY --from=app-builder /home/node/node_modules /home/node/node_modules
-COPY --from=app-builder /home/node/public /home/node/public
-COPY --from=app-builder /home/node/next.config.ts /home/node/next.config.ts
-COPY --from=app-builder /home/node/LICENSE /home/node/LICENSE
-COPY --from=app-builder /home/node/README.md /home/node/README.md
-COPY --from=app-builder /home/node/package.json /home/node/package.json
+COPY --from=app-builder /app/.next /app/.next
+COPY --from=app-builder /app/node_modules /app/node_modules
+COPY --from=app-builder /app/public /app/public
+COPY --from=app-builder /app/next.config.ts /app/next.config.ts
+COPY --from=app-builder /app/package.json /app/package.json
 
 # [Stage 3/3] starting webserver
-FROM node:24.13.0-alpine3.23 AS app
+FROM ${NODE_IMAGE} AS app
 
 # labels
-LABEL maintainer="millinks"
-LABEL context="landing-page"
-LABEL project="millinks-webapp"
-LABEL "website.name"="MilLinks"
-LABEL "website.url"="https://millinks.com.br"
+LABEL maintainer="millinks" context="landing-page" project="millinks-webapp" "website.name"="MilLinks" "website.url"="https://millinks.com.br"
 
 # default environments var
-ARG TIME_ZONE=UTC
-ARG API_CLIENT_ID
-ARG API_CLIENT_SECRET
-ARG NEXT_PUBLIC_API_BASE_URL
-ARG NEXT_PUBLIC_API_AUTH_URL
-ARG NEXT_PUBLIC_BASE_PATH
-
+ARG TIME_ZONE=America/Fortaleza
 ENV TZ=$TIME_ZONE
-ENV API_CLIENT_ID=$API_CLIENT_ID
-ENV API_CLIENT_SECRET=$API_CLIENT_SECRET
-ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
-ENV NEXT_PUBLIC_API_AUTH_URL=$NEXT_PUBLIC_API_AUTH_URL
-ENV NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH
 
 # basic config
 RUN apk add --no-cache tzdata
-WORKDIR /home/node
+WORKDIR /app
 
 # mount app
-COPY --from=app-bundle /home/node /home/node/
-RUN chown -R node:node /home/node/.next/
+COPY --from=app-bundle /app /app/
+RUN chown -R node:node /app/.next/
 USER node
 
 EXPOSE 3000
@@ -91,19 +69,19 @@ CMD ["yarn", "start"]
 ## ==========================================
 
 # [Stage 1/2] building documentation
-FROM node:24.13.0-alpine3.23 AS docs-builder
+FROM ${NODE_IMAGE} AS docs-builder
 
 # default environments var
 ENV NODE_OPTIONS='--max_old_space_size=2048'
 
 # basic config
-WORKDIR /home/node
+WORKDIR /app
 
 # copy root files referenced by docs (@site/../CHANGELOG.md, @site/../package.json)
 COPY CHANGELOG.md package.json ./
 
 # mount documentation project
-WORKDIR /home/node/documentation
+WORKDIR /app/documentation
 COPY documentation/package.json documentation/yarn.lock ./
 
 # install dependencies
@@ -116,20 +94,16 @@ COPY documentation/ .
 RUN yarn build
 
 # [Stage 2/2] serving documentation
-FROM nginx:1.27-alpine AS docs
+FROM nginx:1.30.0-alpine3.23 AS docs
 
 # Disable absolute redirects to prevent Nginx from changing HTTPS to HTTP in slash redirects
 RUN sed -i 's/http {/http {\n    absolute_redirect off;/' /etc/nginx/nginx.conf
 
 # labels
-LABEL maintainer="millinks"
-LABEL context="documentation"
-LABEL project="millinks-docs"
-LABEL "website.name"="MilLinks Doc"
-LABEL "website.url"="https://doc.millinks.com.br"
+LABEL maintainer="millinks" context="documentation" project="millinks-docs" "website.name"="MilLinks Doc" "website.url"="https://doc.millinks.com.br"
 
 # copy built site to nginx
-COPY --from=docs-builder /home/node/documentation/build /usr/share/nginx/html/millinks-docs
+COPY --from=docs-builder /app/documentation/build /usr/share/nginx/html/millinks-docs
 
 EXPOSE 80
 
