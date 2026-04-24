@@ -7,17 +7,11 @@ services:
       dockerfile: Dockerfile
       target: app
       args:
-        - TIME_ZONE=${TIME_ZONE:-UTC}
-        - API_CLIENT_ID=${API_CLIENT_ID}
-        - API_CLIENT_SECRET=${API_CLIENT_SECRET}
-        - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
-        - NEXT_PUBLIC_API_AUTH_URL=${NEXT_PUBLIC_API_AUTH_URL}
+        - TIME_ZONE=${TIME_ZONE:-America/Fortaleza}
+      secrets:
+        - millinks_webapp_env
     env_file:
-      - .env.local
-    volumes:
-      - '.:/home/node'
-      - '/home/node/node_modules'
-      - '/home/node/.next'
+      - .env
     ports:
       - '3000:3000'
     networks:
@@ -34,6 +28,10 @@ services:
       - '3001:80'
     networks:
       - network
+
+secrets:
+  millinks_webapp_env:
+    file: .env
 
 networks:
   network:

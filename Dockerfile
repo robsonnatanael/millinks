@@ -4,7 +4,7 @@
 
 ARG NODE_IMAGE=node:24.15.0-alpine3.22
 
-# [Stage 1/3] building app
+# [Stage 1/2] building app
 FROM ${NODE_IMAGE} AS app-builder
 
 # default environments var
@@ -28,20 +28,7 @@ RUN --mount=type=secret,id=millinks_stg_webapp_env \
     fi && \
     yarn build
 
-# [Stage 2/3] bundler/dist
-FROM ${NODE_IMAGE} AS app-bundle
-
-# basic config
-WORKDIR /app
-
-# create dist
-COPY --from=app-builder /app/.next /app/.next
-COPY --from=app-builder /app/node_modules /app/node_modules
-COPY --from=app-builder /app/public /app/public
-COPY --from=app-builder /app/next.config.ts /app/next.config.ts
-COPY --from=app-builder /app/package.json /app/package.json
-
-# [Stage 3/3] starting webserver
+# [Stage 2/2] starting webserver
 FROM ${NODE_IMAGE} AS app
 
 # labels
@@ -50,19 +37,29 @@ LABEL maintainer="millinks" context="landing-page" project="millinks-webapp" "we
 # default environments var
 ARG TIME_ZONE=America/Fortaleza
 ENV TZ=$TIME_ZONE
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
 # basic config
 RUN apk add --no-cache tzdata
 WORKDIR /app
 
-# mount app
-COPY --from=app-bundle /app /app/
-RUN chown -R node:node /app/.next/
-USER node
+# Set correct permissions for nextjs user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy standalone build and static files
+# Next.js standalone output: https://nextjs.org/docs/pages/api-reference/next-config-js/output#standalone
+COPY --from=app-builder /app/public ./public
+COPY --from=app-builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=app-builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
 
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD ["node", "server.js"]
 
 ## ==========================================
 ## DOCS STAGES
@@ -94,7 +91,7 @@ COPY documentation/ .
 RUN yarn build
 
 # [Stage 2/2] serving documentation
-FROM nginx:1.30.0-alpine3.23 AS docs
+FROM nginx:1.30.0-alpine3.23-slim AS docs
 
 # Disable absolute redirects to prevent Nginx from changing HTTPS to HTTP in slash redirects
 RUN sed -i 's/http {/http {\n    absolute_redirect off;/' /etc/nginx/nginx.conf
