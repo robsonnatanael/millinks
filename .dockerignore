@@ -4,6 +4,7 @@
 .husky/
 .next/
 .vscode/
+.cache
 node_modules/
 out/
 skill/
@@ -13,7 +14,8 @@ skill/
 .editorconfig
 .eslintignore
 .eslintrc.json
-.env*
+.env
+.env.*
 .gitignore
 .lintstagedrc
 .prettierignore

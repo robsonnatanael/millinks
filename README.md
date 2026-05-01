@@ -103,17 +103,21 @@ To build the image manually and securely, we use **Docker BuildKit Secrets**. Th
 
 #### 1. Build the Web App
 
-Choose the command based on your environment. These commands pass your `.env` file as a secret mount:
+Build the image passing the corresponding `.env` file as a secret. Use `--build-arg BUILD_ENV` to determine which secret the Dockerfile should load.
 
 **Staging:**
+
 ```bash
 docker build --target app -t my-org/millinks-webapp:staging \
+  --build-arg BUILD_ENV=staging \
   --secret id=millinks_stg_webapp_env,src=.env.stg .
 ```
 
 **Production:**
+
 ```bash
 docker build --target app -t my-org/millinks-webapp:latest \
+  --build-arg BUILD_ENV=production \
   --secret id=millinks_webapp_env,src=.env.prod .
 ```
 
@@ -122,11 +126,13 @@ docker build --target app -t my-org/millinks-webapp:latest \
 Pass the corresponding `.env` file at runtime:
 
 **Staging:**
+
 ```bash
 docker run -dp 3000:3000 --name millinks-stg-webapp --env-file .env.stg my-org/millinks-webapp:staging
 ```
 
 **Production:**
+
 ```bash
 docker run -dp 3000:3000 --name millinks-webapp --env-file .env.prod my-org/millinks-webapp:latest
 ```
