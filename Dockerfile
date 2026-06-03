@@ -18,15 +18,16 @@ COPY package.json yarn.lock ./
 RUN yarn --frozen-lockfile
 COPY . /app/
 
+ARG BUILD_ENV=production
+
 # build using secrets (Staging or Production)
-RUN --mount=type=secret,id=millinks_stg_webapp_env \
-    --mount=type=secret,id=millinks_webapp_env \
-    if [ -f /run/secrets/millinks_stg_webapp_env ]; then \
-        export $(grep -v '^#' /run/secrets/millinks_stg_webapp_env | xargs); \
-    elif [ -f /run/secrets/millinks_webapp_env ]; then \
-        export $(grep -v '^#' /run/secrets/millinks_webapp_env | xargs); \
-    fi && \
-    yarn build
+RUN --mount=type=secret,id=millinks_stg_webapp_env,required=false \
+    --mount=type=secret,id=millinks_webapp_env,required=false \
+    if [ "$BUILD_ENV" = "staging" ]; then \
+        export $(grep -v '^#' /run/secrets/millinks_stg_webapp_env | xargs) && yarn build; \
+    else \
+        export $(grep -v '^#' /run/secrets/millinks_webapp_env | xargs) && yarn build; \
+    fi
 
 # [Stage 2/2] starting webserver
 FROM ${NODE_IMAGE} AS app
