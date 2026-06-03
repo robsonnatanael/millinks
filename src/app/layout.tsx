@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Poppins } from 'next/font/google';
 
-import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
-
 import './globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryProvider } from '@/providers/query';
@@ -42,7 +40,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
       >
         <QueryProvider>
-          <ThemeRegistry>{children}</ThemeRegistry>
+          {children}
           <ToastContainer />
         </QueryProvider>
       </body>
