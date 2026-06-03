@@ -12,7 +12,7 @@ O MilLinks foi construído com foco em padrões modernos da web e eficiência do
 
 - **Next.js 16+**: Utilizando o **App Router** para roteamento aprimorado, Componentes de Servidor para desempenho e um sistema robusto de middleware.
 - **Segurança de Tipos**: Construído inteiramente com **TypeScript**, garantindo tipagem forte em todas as camadas, da UI às interações com a API.
-- **Estilos Modulares**: Uso do **Material UI (MUI)** combinado com **Emotion** para estilização e layout baseados em temas consistentes.
+- **Estilos Modulares**: Uso do **Tailwind CSS** combinado com **Shadcn UI** para estilização utilitária e componentes acessíveis consistentes.
 
 ## Screaming Architecture (Baseada em Funcionalidades)
 
@@ -36,4 +36,4 @@ Cada componente da arquitetura é projetado com uma única responsabilidade:
 
 - **Persistência de Estado**: Manipulada através de cookies seguros e React Context.
 - **Validação de Dados**: Aplicada nas fronteiras (entrada e saída) utilizando o **Zod**.
-- **Tema (Theming)**: Isolado em `src/theme` para garantir consistência global sem poluir a lógica do componente.
+- **Tema (Theming)**: Baseado nas configurações do **Tailwind CSS** e variáveis CSS (em `src/app/globals.css`) para garantir consistência global sem poluir a lógica do componente.
