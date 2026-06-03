@@ -12,7 +12,7 @@ MilLinks is built with a focus on modern web standards and developer efficiency:
 
 - **Next.js 16+**: Leveraging the **App Router** for improved routing, Server Components for performance, and a robust middleware system.
 - **Type Safety**: Built entirely with **TypeScript**, ensuring strict typing across all layers, from UI to API interactions.
-- **Modular Styles**: Use of **Material UI (MUI)** combined with **Emotion** for consistent, theme-driven styling and layout.
+- **Modular Styles**: Use of **Tailwind CSS** combined with **Shadcn UI** for consistent, utility-driven styling and accessible components.
 
 ## Screaming Architecture (Feature-based)
 
@@ -36,4 +36,4 @@ Every component of the architecture is designed with a single responsibility:
 
 - **State Persistence**: Handled via secure cookies and React Context.
 - **Data Validation**: Enforced at the boundaries (entry and exit) using **Zod**.
-- **Theming**: Isolated within `src/theme` to ensure global consistency without polluting component logic.
+- **Theming**: Powered by **Tailwind CSS** configuration and CSS variables (in `src/app/globals.css`) to ensure global consistency without polluting component logic.

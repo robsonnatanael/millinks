@@ -13,7 +13,7 @@ Perfect for content creators, developers, and organizations looking for a custom
 ## Key Features
 
 - **Centralization of multiple links**: Connect your audience through a single, shared link on social media.
-- **Modern Architecture**: Built with Next.js, TypeScript, and Material UI, ensuring performance and a great developer experience.
+- **Modern Architecture**: Built with Next.js, TypeScript, and Tailwind CSS (with Shadcn UI), ensuring performance and a great developer experience.
 - **Modular Design**: Follows a Feature-based Modular Structure (Screaming Architecture).
 - **Docker Ready**: Easily deployable using Docker and Docker Compose.
 - **Responsive Interface**: Optimized for all devices.
@@ -32,7 +32,7 @@ MilLinks can be used for:
 
 - **Next.js 16+** (App Router)
 - **TypeScript**
-- **Material UI (MUI)**
+- **Tailwind CSS & Shadcn UI**
 - **TanStack Query**
 - **Docker & Docker Compose**
 
