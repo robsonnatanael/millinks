@@ -92,7 +92,7 @@ COPY documentation/ .
 RUN yarn build
 
 # [Stage 2/2] serving documentation
-FROM nginx:1.30.0-alpine3.23-slim AS docs
+FROM nginx:1.31.2-alpine3.23-slim AS docs
 
 # Disable absolute redirects to prevent Nginx from changing HTTPS to HTTP in slash redirects
 RUN sed -i 's/http {/http {\n    absolute_redirect off;/' /etc/nginx/nginx.conf
