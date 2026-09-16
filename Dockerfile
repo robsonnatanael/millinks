@@ -2,10 +2,8 @@
 ## APP STAGES
 ## ==========================================
 
-ARG NODE_IMAGE=node:24.15.0-alpine3.22
-
 # [Stage 1/2] building app
-FROM ${NODE_IMAGE} AS app-builder
+FROM node:24.21.0-alpine3.24 AS app-builder
 
 # default environments var
 ENV NODE_OPTIONS='--max_old_space_size=2048'
@@ -30,7 +28,7 @@ RUN --mount=type=secret,id=millinks_stg_webapp_env,required=false \
     fi
 
 # [Stage 2/2] starting webserver
-FROM ${NODE_IMAGE} AS app
+FROM node:24.21.0-alpine3.24 AS app
 
 # labels
 LABEL maintainer="millinks" context="landing-page" project="millinks-webapp" "website.name"="MilLinks" "website.url"="https://millinks.com.br"
@@ -67,7 +65,7 @@ CMD ["node", "server.js"]
 ## ==========================================
 
 # [Stage 1/2] building documentation
-FROM ${NODE_IMAGE} AS docs-builder
+FROM node:24.21.0-alpine3.24 AS docs-builder
 
 # default environments var
 ENV NODE_OPTIONS='--max_old_space_size=2048'
@@ -92,7 +90,7 @@ COPY documentation/ .
 RUN yarn build
 
 # [Stage 2/2] serving documentation
-FROM nginx:1.31.2-alpine3.23-slim AS docs
+FROM nginx:1.31-alpine3.24 AS docs
 
 # Disable absolute redirects to prevent Nginx from changing HTTPS to HTTP in slash redirects
 RUN sed -i 's/http {/http {\n    absolute_redirect off;/' /etc/nginx/nginx.conf
@@ -103,6 +101,9 @@ LABEL maintainer="millinks" context="documentation" project="millinks-docs" "web
 # copy built site to nginx
 COPY --from=docs-builder /app/documentation/build /usr/share/nginx/html/millinks-docs
 
-EXPOSE 80
+# change default port to 8080
+RUN sed -i 's/listen       80;/listen 8080;/g' /etc/nginx/conf.d/default.conf
+
+EXPOSE 8080
 
 CMD ["nginx", "-g", "daemon off;"]
