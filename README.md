@@ -13,7 +13,7 @@
 
 ---
 
-## 🚀 Overview
+## Overview
 
 **MilLinks** is a professional-grade link management system designed to centralize a digital presence into a single, elegant interface. Built on top of **Next.js 16+** and **TypeScript**, it leverages advanced architectural patterns to ensure speed, security, and developer productivity.
 
@@ -21,7 +21,7 @@ The project is designed with a **Screaming Architecture**, prioritizing domain c
 
 Perfect for content creators, developers, and organizations looking for a customizable, self-hosted alternative to generic link services.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: [Next.js](https://nextjs.org/) (App Router, Server Components)
 - **Language**: [TypeScript](https://www.typescriptlang.org/) (Strict mode)
@@ -31,7 +31,7 @@ Perfect for content creators, developers, and organizations looking for a custom
 - **Infrastructure**: [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/)
 - **Documentation**: [Docusaurus](https://docusaurus.io/) (Multi-language support)
 
-## 🏗️ Modular Architecture
+## Modular Architecture
 
 The project follows a **Feature-based Modular Structure**, separating concerns by domain. This ensures that the codebase remains maintainable as the project scales.
 
@@ -40,7 +40,7 @@ The project follows a **Feature-based Modular Structure**, separating concerns b
 - `src/services`: Decoupled API interaction layer.
 - `src/lib`: Core utilities (Auth Token Service, API Client).
 
-## 📜 Available Scripts
+## Available Scripts
 
 The project includes several scripts to manage development, building, and documentation:
 
@@ -63,7 +63,7 @@ The project includes several scripts to manage development, building, and docume
 
 - `yarn postinstall`: Automatically installs dependencies for the documentation project after the root dependencies are installed.
 
-## 📖 Documentation
+## Documentation
 
 MilLinks includes a professional documentation site built with Docusaurus, supporting **English** and **Portuguese (BR)**.
 
@@ -81,7 +81,7 @@ yarn docs:dev:pt
 
 For more detailed guides on installation, architecture, and deployment, visit our **[Full Documentation Site](https://millinks.robsonnatanael.com.br/millinks-doc)**.
 
-## 🐳 Deployment
+## Deployment
 
 MilLinks is containerized for seamless deployment using a multi-stage Docker build.
 
@@ -121,7 +121,25 @@ docker build --target app -t my-org/millinks-webapp:latest \
   --secret id=millinks_webapp_env,src=.env.prod .
 ```
 
-#### 2. Run the Container
+#### 2. Create Docker Swarm Secret
+
+If you are deploying to a Docker Swarm cluster, create the secret before running the service:
+
+**Staging:**
+
+```bash
+# Cria o secret no cluster do Docker Swarm
+docker secret create millinks_stg_webapp_env .env.stg
+```
+
+**Production:**
+
+```bash
+# Cria o secret no cluster do Docker Swarm
+docker secret create millinks_webapp_env .env.prod
+```
+
+#### 3. Run the Container
 
 Pass the corresponding `.env` file at runtime:
 
@@ -137,7 +155,7 @@ docker run -dp 3000:3000 --name millinks-stg-webapp --env-file .env.stg my-org/m
 docker run -dp 3000:3000 --name millinks-webapp --env-file .env.prod my-org/millinks-webapp:latest
 ```
 
-#### 3. Documentation (Optional)
+#### 4. Documentation (Optional)
 
 To build and run the documentation server:
 
@@ -149,12 +167,10 @@ docker build --target docs -t my-org/millinks-docs .
 docker run -dp 3001:80 --name millinks-docs my-org/millinks-docs
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome technical contributions. Please read our **[Contributing Guidelines](https://millinks.robsonnatanael.com.br/millinks-doc/docs/contributing/contributing)** before submitting a Pull Request.
 
 ---
 
-<p align="center">
-  Developed with ❤️ by <a href="https://github.com/robsonnatanael">Robson Natanael</a>
-</p>
+_Mantido por [Robson Natanael](https://github.com/robsonnatanael)_
