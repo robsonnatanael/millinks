@@ -4,23 +4,28 @@
 .husky/
 .next/
 .vscode/
+.cache
 node_modules/
 out/
+skill/
 
 # Files Configs
 .dockerignore
 .editorconfig
 .eslintignore
 .eslintrc.json
-.env*
+.env
+.env.*
 .gitignore
 .lintstagedrc
 .prettierignore
 .prettierrc.json
 .releaserc.json
-CHANGELOG.md
 commitlint.config.js
 docker-compose.yml
 Dockerfile
+
+# Files Markdown
 *.md
 !README.md
+!CHANGELOG.md

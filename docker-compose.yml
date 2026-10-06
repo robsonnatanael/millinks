@@ -1,11 +1,38 @@
 services:
   app:
-    container_name: millinks
+    container_name: millinks_webapp
+    image: millinks/millinks-webapp:dev
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - '.:/app'
-      - '/app/node_modules'
+      target: app
+      args:
+        - TIME_ZONE=${TIME_ZONE:-America/Fortaleza}
+      secrets:
+        - millinks_webapp_env
+    env_file:
+      - .env
     ports:
       - '3000:3000'
+    networks:
+      - network
+
+  docs:
+    container_name: millinks_docs
+    image: millinks/millinks-docs:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: docs
+    ports:
+      - '8080:8080'
+    networks:
+      - network
+
+secrets:
+  millinks_webapp_env:
+    file: .env
+
+networks:
+  network:
+    driver: bridge

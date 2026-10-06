@@ -1,0 +1,42 @@
+{
+  "link.title.Documentation": {
+    "message": "Documentação",
+    "description": "The title of the footer links column with title=Documentation in the footer"
+  },
+  "link.title.Social": {
+    "message": "Social",
+    "description": "The title of the footer links column with title=Social in the footer"
+  },
+  "link.title.More": {
+    "message": "Mais",
+    "description": "The title of the footer links column with title=More in the footer"
+  },
+  "link.item.label.Introduction": {
+    "message": "Introdução",
+    "description": "The label of footer link with label=Introduction linking to /docs/"
+  },
+  "link.item.label.Getting Started": {
+    "message": "Começando",
+    "description": "The label of footer link with label=Getting Started linking to /docs/getting-started/installation"
+  },
+  "link.item.label.LinkedIn": {
+    "message": "LinkedIn",
+    "description": "The label of footer link with label=LinkedIn linking to https://www.linkedin.com/in/robsonnatanael"
+  },
+  "link.item.label.Twitter / X": {
+    "message": "Twitter / X",
+    "description": "The label of footer link with label=Twitter / X linking to https://x.com/robsonnatanael"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/robsonnatanael/millinks"
+  },
+  "link.item.label.Official Site": {
+    "message": "Site Oficial",
+    "description": "The label of footer link with label=Official Site linking to https://millinks.robsonnatanael.com.br/"
+  },
+  "copyright": {
+    "message": "Copyright © 2026 MilLinks. Desenvolvido por Robson Natanael. Built with Docusaurus.",
+    "description": "The footer copyright"
+  }
+}

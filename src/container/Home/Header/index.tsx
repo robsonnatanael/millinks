@@ -1,38 +1,27 @@
 import { FC } from 'react';
 import Image from 'next/image';
 
-import { Avatar, Container, Typography } from '@mui/material';
-
 import { HeaderProps } from './props';
 
 const Header: FC<HeaderProps> = props => {
   const { data } = props;
 
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
   return (
-    <Container
-      maxWidth="sm"
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        mt: '5rem',
-        mb: '1rem',
-      }}
-    >
-      <Avatar sx={{ width: 96, height: 96, position: 'relative' }}>
+    <div className="mx-auto mt-20 mb-4 flex w-full max-w-sm flex-col items-center px-4 sm:px-6 lg:px-8">
+      <div className="relative h-24 w-24 overflow-hidden rounded-full">
         <Image
-          src={data.page.avatar}
+          src={`${basePath}${data.page.avatar}`}
           alt={data.page.title}
           fill
           sizes="96px"
           priority
           style={{ objectFit: 'cover' }}
         />
-      </Avatar>
-      <Typography variant="h4" sx={{ mt: '1rem', textAlign: 'center' }}>
-        {data.page.title}
-      </Typography>
-    </Container>
+      </div>
+      <h1 className="mt-4 text-center text-4xl">{data.page.title}</h1>
+    </div>
   );
 };
 

@@ -1,51 +1,29 @@
 import Image from 'next/image';
 
-import { Box, Container } from '@mui/material';
-
 const Footer = () => {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
   return (
-    <Box
-      component="footer"
-      sx={{
-        width: '100%',
-        height: '3rem',
-        position: 'absolute',
-        bottom: 0,
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
-      <Container
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          fontSize: 12,
-        }}
-      >
-        <Box
-          component="a"
+    <footer className="absolute bottom-0 flex h-12 w-full items-center">
+      <div className="container mx-auto flex justify-center text-xs">
+        <a
           href="https://www.robsonnatanael.com.br"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            textDecoration: 'none',
-            color: 'inherit',
-          }}
+          className="flex items-center text-inherit no-underline"
         >
           Desenvolvido por
-          <Box component="span" sx={{ ml: 1, display: 'flex' }}>
+          <span className="ml-2 flex">
             <Image
-              src="/assets/images/footer/logo-robson-natanael.svg"
+              src={`${basePath}/assets/images/footer/logo-robson-natanael.svg`}
               alt="logo Robson Natanael"
               width={84}
               height={17}
             />
-          </Box>
-        </Box>
-      </Container>
-    </Box>
+          </span>
+        </a>
+      </div>
+    </footer>
   );
 };
 

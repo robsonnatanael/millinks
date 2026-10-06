@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Poppins } from 'next/font/google';
 
-import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
-
 import './globals.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { QueryProvider } from '@/providers/query';
+import { ToastContainer } from 'react-toastify';
 import { GoogleAnalytics } from '@/core/web-analytics/google-analytics';
+import { FaroInit } from '@/core/observability/faro-init';
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
 
@@ -35,10 +37,14 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <GoogleAnalytics />
+      <FaroInit />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
       >
-        <ThemeRegistry>{children}</ThemeRegistry>
+        <QueryProvider>
+          {children}
+          <ToastContainer />
+        </QueryProvider>
       </body>
     </html>
   );

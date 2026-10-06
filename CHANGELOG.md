@@ -1,39 +1,33 @@
 ## [2.0.2](https://github.com/robsonnatanael/millinks/compare/v2.0.1...v2.0.2) (2026-02-06)
 
-
 ### Bug Fixes
 
-* Dockerfile to reduce vulnerabilities ([#39](https://github.com/robsonnatanael/millinks/issues/39)) ([66d5ae7](https://github.com/robsonnatanael/millinks/commit/66d5ae72d05945fbdb10b756889f3843b2f241fa))
-* package.json & yarn.lock to reduce vulnerabilities ([d07691f](https://github.com/robsonnatanael/millinks/commit/d07691f1ea51c9ecc652ff1c2a396784bc540c54))
-* upgrade next from 16.0.10 to 16.1.0 ([b56f604](https://github.com/robsonnatanael/millinks/commit/b56f6041799068beb698353e2cefd1e44acd029e))
+- Dockerfile to reduce vulnerabilities ([#39](https://github.com/robsonnatanael/millinks/issues/39)) ([66d5ae7](https://github.com/robsonnatanael/millinks/commit/66d5ae72d05945fbdb10b756889f3843b2f241fa))
+- package.json & yarn.lock to reduce vulnerabilities ([d07691f](https://github.com/robsonnatanael/millinks/commit/d07691f1ea51c9ecc652ff1c2a396784bc540c54))
+- upgrade next from 16.0.10 to 16.1.0 ([b56f604](https://github.com/robsonnatanael/millinks/commit/b56f6041799068beb698353e2cefd1e44acd029e))
 
 ## [2.0.1](https://github.com/robsonnatanael/millinks/compare/v2.0.0...v2.0.1) (2025-07-13)
 
-
 ### Bug Fixes
 
-* package.json & yarn.lock to reduce vulnerabilities ([#34](https://github.com/robsonnatanael/millinks/issues/34)) ([76aee67](https://github.com/robsonnatanael/millinks/commit/76aee67815f9fd02977623c89e5263a617a504b6))
+- package.json & yarn.lock to reduce vulnerabilities ([#34](https://github.com/robsonnatanael/millinks/issues/34)) ([76aee67](https://github.com/robsonnatanael/millinks/commit/76aee67815f9fd02977623c89e5263a617a504b6))
 
 # [2.0.0](https://github.com/robsonnatanael/millinks/compare/v1.0.0...v2.0.0) (2025-03-18)
 
-
 ### Bug Fixes
 
-* fix: text nodes warning ([5ee768a](https://github.com/robsonnatanael/millinks/commit/5ee768a21c3fb78d1294412062b8e24d57c4dbd8))
-
+- fix: text nodes warning ([5ee768a](https://github.com/robsonnatanael/millinks/commit/5ee768a21c3fb78d1294412062b8e24d57c4dbd8))
 
 ### Code Refactoring
 
-* replaces architecture ([2d82d0b](https://github.com/robsonnatanael/millinks/commit/2d82d0b1227aaafc260fd69804c81657330e57d8))
-
+- replaces architecture ([2d82d0b](https://github.com/robsonnatanael/millinks/commit/2d82d0b1227aaafc260fd69804c81657330e57d8))
 
 ### BREAKING CHANGES
 
-* uses the new nextjs architecture
+- uses the new nextjs architecture
 
 # 1.0.0 (2022-09-04)
 
-
 ### Features
 
-* new avatar ([78c241f](https://github.com/robsonnatanael/millinks/commit/78c241f73b6cd0002a1ae6d599445bd16a9d0250))
+- new avatar ([78c241f](https://github.com/robsonnatanael/millinks/commit/78c241f73b6cd0002a1ae6d599445bd16a9d0250))

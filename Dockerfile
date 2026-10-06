@@ -1,42 +1,113 @@
-# Building app
-FROM node:24.13.0-alpine3.23 AS builder
+## ==========================================
+## APP STAGES
+## ==========================================
+
+# [Stage 1/2] building app
+FROM node:24.21.0-alpine3.24 AS app-builder
+
 # default environments var
 ENV NODE_OPTIONS='--max_old_space_size=2048'
-# baisc config
-WORKDIR /home/node
-# mount environment dist
+
+# basic config
+WORKDIR /app
+
+# mount dependencies
 COPY package.json yarn.lock ./
+RUN yarn --frozen-lockfile
+COPY . /app/
+
+ARG BUILD_ENV=production
+
+# build using secrets (Staging or Production)
+RUN --mount=type=secret,id=millinks_stg_webapp_env,required=false \
+    --mount=type=secret,id=millinks_webapp_env,required=false \
+    if [ "$BUILD_ENV" = "staging" ]; then \
+        export $(grep -v '^#' /run/secrets/millinks_stg_webapp_env | xargs) && yarn build; \
+    else \
+        export $(grep -v '^#' /run/secrets/millinks_webapp_env | xargs) && yarn build; \
+    fi
+
+# [Stage 2/2] starting webserver
+FROM node:24.21.0-alpine3.24 AS app
+
+RUN apk update && apk upgrade --no-cache
+
+# labels
+LABEL maintainer="millinks" context="landing-page" project="millinks-webapp" "website.name"="MilLinks" "website.url"="https://millinks.com.br"
+
+# default environments var
+ARG TIME_ZONE=America/Fortaleza
+ENV TZ=$TIME_ZONE
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+# basic config
+RUN apk add --no-cache tzdata
+WORKDIR /app
+
+# Set correct permissions for nextjs user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy standalone build and static files
+# Next.js standalone output: https://nextjs.org/docs/pages/api-reference/next-config-js/output#standalone
+COPY --from=app-builder /app/public ./public
+COPY --from=app-builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=app-builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]
+
+## ==========================================
+## DOCS STAGES
+## ==========================================
+
+# [Stage 1/2] building documentation
+FROM node:24.21.0-alpine3.24 AS docs-builder
+
+# default environments var
+ENV NODE_OPTIONS='--max_old_space_size=2048'
+
+# basic config
+WORKDIR /app
+
+# copy root files referenced by docs (@site/../CHANGELOG.md, @site/../package.json)
+COPY CHANGELOG.md package.json ./
+
+# mount documentation project
+WORKDIR /app/documentation
+COPY documentation/package.json documentation/yarn.lock ./
+
 # install dependencies
 RUN yarn --frozen-lockfile
-COPY . /home/node/
-# build
+
+# copy documentation source
+COPY documentation/ .
+
+# build static site
 RUN yarn build
 
-# Bundler/Dist
-FROM node:24.13.0-alpine3.23 AS app-bundle
-# basic config
-WORKDIR /home/node
-# create dist
-COPY --from=builder /home/node/.next /home/node/.next
-COPY --from=builder /home/node/node_modules /home/node/node_modules
-COPY --from=builder /home/node/public /home/node/public
-COPY --from=builder /home/node/LICENSE /home/node/LICENSE
-COPY --from=builder /home/node/README.md /home/node/README.md
-COPY --from=builder /home/node/package.json /home/node/package.json
+# [Stage 2/2] serving documentation
+FROM nginx:1.31.6-alpine3.24 AS docs
 
-# Starting webserver
-FROM node:24.13.0-alpine3.23
+RUN apk update && apk upgrade --no-cache
+
+# Disable absolute redirects to prevent Nginx from changing HTTPS to HTTP in slash redirects
+RUN sed -i 's/http {/http {\n    absolute_redirect off;/' /etc/nginx/nginx.conf
+
 # labels
-LABEL maintainer="robsonnatanael"
-LABEL context="landing-page"
-LABEL project="millinks"
-LABEL "website.name"="Millinks"
-LABEL "website.url"="https://millinks.robsonnatanael.com.br"
-# default environments var
-ENV TZ="America/Fortaleza"
-# basic config
-USER node
-WORKDIR /home/node
-# mount app
-COPY --from=app-bundle /home/node /home/node/
-CMD ["yarn", "start"]
+LABEL maintainer="millinks" context="documentation" project="millinks-docs" "website.name"="MilLinks Doc" "website.url"="https://doc.millinks.com.br"
+
+# copy built site to nginx
+COPY --from=docs-builder /app/documentation/build /usr/share/nginx/html/millinks-docs
+
+# change default port to 8080
+RUN sed -i 's/listen       80;/listen 8080;/g' /etc/nginx/conf.d/default.conf
+
+EXPOSE 8080
+
+CMD ["nginx", "-g", "daemon off;"]
