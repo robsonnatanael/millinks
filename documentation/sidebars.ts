@@ -20,6 +20,7 @@ export default {
       items: [
         'architecture/overview',
         'architecture/project-structure',
+        'architecture/observability',
         {
           type: 'category',
           label: 'Core Services',
