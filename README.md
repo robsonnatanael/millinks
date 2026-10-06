@@ -29,6 +29,7 @@ Perfect for content creators, developers, and organizations looking for a custom
 - **Data Management**: [TanStack Query](https://tanstack.com/query) (v5), [Zod](https://zod.dev/)
 - **Architecture**: Modular Feature-based Architecture (Screaming Architecture)
 - **Infrastructure**: [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/)
+- **Observability**: [OpenTelemetry](https://opentelemetry.io/), [Grafana Faro](https://grafana.com/oss/faro/)
 - **Documentation**: [Docusaurus](https://docusaurus.io/) (Multi-language support)
 
 ## Modular Architecture

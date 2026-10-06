@@ -30,6 +30,8 @@ RUN --mount=type=secret,id=millinks_stg_webapp_env,required=false \
 # [Stage 2/2] starting webserver
 FROM node:24.21.0-alpine3.24 AS app
 
+RUN apk update && apk upgrade --no-cache
+
 # labels
 LABEL maintainer="millinks" context="landing-page" project="millinks-webapp" "website.name"="MilLinks" "website.url"="https://millinks.com.br"
 
@@ -90,7 +92,9 @@ COPY documentation/ .
 RUN yarn build
 
 # [Stage 2/2] serving documentation
-FROM nginx:1.31-alpine3.24 AS docs
+FROM nginx:1.31.6-alpine3.24 AS docs
+
+RUN apk update && apk upgrade --no-cache
 
 # Disable absolute redirects to prevent Nginx from changing HTTPS to HTTP in slash redirects
 RUN sed -i 's/http {/http {\n    absolute_redirect off;/' /etc/nginx/nginx.conf
