@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/robsonnatanael/millinks/compare/v2.1.0...v2.2.0) (2026-10-09)
+
+
+### Features
+
+* **agents:** add nextjs code reviewer agent and restructure skills ([086b988](https://github.com/robsonnatanael/millinks/commit/086b988710b60c16fffeed868f9f136471753a41))
+
 # [2.1.0](https://github.com/robsonnatanael/millinks/compare/v2.0.2...v2.1.0) (2026-10-06)
 
 
