@@ -8,14 +8,17 @@ export async function apiFetch<T>(
 ): Promise<T> {
   const token = await tokenService.getToken();
 
-  const response = await fetch(`${process.env.API_BASE_URL}${endpoint}`, {
-    ...options,
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}`,
+    {
+      ...options,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+    }
+  );
 
   if (response.status === 401 && retry) {
     logger.warn(`401 em ${endpoint}. Tentando nova autenticação.`);

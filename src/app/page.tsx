@@ -8,13 +8,16 @@ import { Linktree } from '@/@types/api';
 import { logger } from '@/lib/logger';
 import { ENDPOINTS } from '@/shared/utils/endpoints';
 
+import { connection } from 'next/server';
+
 export default async function Home() {
+  await connection();
   let navLinks = data.links;
   const revalidateTime = 60 * 5;
 
   try {
     const response = await apiFetch<Linktree>(
-      `${ENDPOINTS.LINKTREES}?sort=createdAt:asc`,
+      `${ENDPOINTS.LINKTREES}?filters[is_active][$eq]=true&sort=createdAt:asc`,
       {
         next: { revalidate: revalidateTime },
       }

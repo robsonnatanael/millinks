@@ -12,11 +12,16 @@ Crie um arquivo `.env.local` na raiz do projeto para armazenar suas configuraç�
 
 ```bash
 # Modelo para .env.local
-TIME_ZONE="America/Fortaleza"
-API_CLIENT_ID="seu_client_id"
-API_CLIENT_SECRET="seu_client_secret"
 NEXT_PUBLIC_API_AUTH_URL="/auth/local"
 NEXT_PUBLIC_API_BASE_URL="https://sua-url-da-api.com/api"
+NEXT_PUBLIC_BASE_PATH=""
+NEXT_PUBLIC_FARO_ENVIRONMENT_NAME="development"
+NEXT_PUBLIC_FARO_APP_NAME="millinks"
+NEXT_PUBLIC_FARO_COLLECTOR_URL="http://localhost:12345/collect"
+NEXT_PUBLIC_GA_MEASUREMENT_ID="G-XXXXXXXXXX"
+
+API_CLIENT_ID="seu_client_id"
+API_CLIENT_SECRET="seu_client_secret"
 ```
 
 ## Categorias de Variáveis
@@ -27,6 +32,11 @@ As variáveis prefixadas com `NEXT_PUBLIC_` são acessíveis pelo navegador. Ela
 
 - `NEXT_PUBLIC_API_BASE_URL`: A URL raiz da API de backend, exposta ao cliente.
 - `NEXT_PUBLIC_API_AUTH_URL`: O endpoint específico de autenticação, exposto ao cliente.
+- `NEXT_PUBLIC_BASE_PATH`: O caminho base (base path) do roteador da aplicação Next.js.
+- `NEXT_PUBLIC_FARO_ENVIRONMENT_NAME`: Nome do ambiente de observabilidade.
+- `NEXT_PUBLIC_FARO_APP_NAME`: Nome da aplicação na observabilidade.
+- `NEXT_PUBLIC_FARO_COLLECTOR_URL`: URL do endpoint do coletor Faro.
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID`: ID de medição do Google Analytics.
 
 ### Variáveis de Servidor (Seguro)
 
@@ -34,24 +44,12 @@ Essas variáveis são acessíveis apenas no lado do servidor Node.js e **nunca**
 
 - `API_CLIENT_ID`: Identificador único para a autenticação do serviço interno.
 - `API_CLIENT_SECRET`: A chave secreta para a autenticação do serviço interno (**Mantenha isso em segurança!**).
-- `TIME_ZONE`: O fuso horário utilizado pela aplicação (ex: `America/Fortaleza`).
 
 ## Como as Variáveis São Usadas
 
-### No `next.config.ts`
-
-O `next.config.ts` mapeia as variáveis `NEXT_PUBLIC_*` para a propriedade `env`, tornando-as acessíveis via `process.env` tanto no cliente quanto no servidor:
-
-```typescript
-env: {
-  API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
-  API_AUTH_URL: process.env.NEXT_PUBLIC_API_AUTH_URL,
-},
-```
-
 ### No Docker
 
-Ao construir com Docker, as variáveis `NEXT_PUBLIC_*` precisam ser passadas como **build arguments** (`ARG`), pois o Next.js as incorpora ao bundle do cliente durante o `next build`. Variáveis apenas de runtime (como `API_CLIENT_ID`) são injetadas pela diretiva `env_file` no `docker-compose.yml`.
+Ao construir com Docker, as variáveis `NEXT_PUBLIC_*` precisam ser passadas como **build arguments** (`ARG`), pois o Next.js as incorpora ao bundle do cliente durante o `next build`. Variáveis apenas de runtime (como `API_CLIENT_ID`) são injetadas em tempo de execução através do script `entrypoint.sh` ou arquivos `.env`.
 
 Para mais detalhes, veja a documentação do [Docker Compose](../deployment/docker-compose.md).
 

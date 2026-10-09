@@ -19,13 +19,20 @@ class TokenService {
 
   async refreshAccessToken(): Promise<string> {
     try {
-      const API_AUTH_URL = `${process.env.API_BASE_URL}${process.env.API_AUTH_URL}`;
+      const API_AUTH_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}${process.env.NEXT_PUBLIC_API_AUTH_URL}`;
+      const identifier = process.env.API_CLIENT_ID;
+      const password = process.env.API_CLIENT_SECRET;
+
+      if (!identifier || !password) {
+        throw new Error('Missing API_CLIENT_ID or API_CLIENT_SECRET');
+      }
+
       const response = await fetch(API_AUTH_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          identifier: process.env.API_CLIENT_ID,
-          password: process.env.API_CLIENT_SECRET,
+          identifier,
+          password,
         }),
       });
 

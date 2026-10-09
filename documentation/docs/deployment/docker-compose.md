@@ -28,7 +28,7 @@ docker compose --env-file .env.local up -d --build
 ```
 
 - **Web App**: Accessible at `http://localhost:3000`
-- **Documentation**: Accessible at `http://localhost:3001`
+- **Documentation**: Accessible at `http://localhost:8080`
 
 ### Stopping the Stack
 

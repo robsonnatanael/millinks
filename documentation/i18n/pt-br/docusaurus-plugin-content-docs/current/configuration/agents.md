@@ -17,3 +17,7 @@ O principal objetivo deste texto é garantir que os agentes de IA operem de mane
 Uma das regras ativas exige que, antes de realizar qualquer tarefa relacionada ao Next.js, o agente de IA leia a documentação oficial e atualizada armazenada localmente no diretório `node_modules/next/dist/docs/`.
 
 Como os modelos de IA são treinados com base em dados históricos, essa técnica garante que o agente siga as diretrizes mais recentes do framework durante o desenvolvimento, evitando sugerir recursos obsoletos ou sofrer "alucinações" em relação ao Next.js.
+
+### Diretório de Skills
+
+As skills e configurações adicionais dos agentes foram movidas de `skill/` para `.agents/skills/`. Certifique-se de referenciar o caminho correto ao explorar ou modificar o comportamento dos agentes.
