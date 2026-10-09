@@ -17,3 +17,7 @@ The primary goal of this file is to ensure that AI agents behave appropriately a
 One of the active rules dictates that before any work related to Next.js, the AI agent must read the official, up-to-date documentation stored locally in the `node_modules/next/dist/docs/` directory.
 
 Since AI models are trained on historical data, this ensures that the agent follows the absolute latest guidelines from the framework during implementation, thus avoiding deprecated approaches or "hallucinations" about Next.js features.
+
+### Skills Directory
+
+Agent skills and additional configurations have been moved from `skill/` to `.agents/skills/`. Ensure you reference the correct path when exploring or modifying agent behaviors.

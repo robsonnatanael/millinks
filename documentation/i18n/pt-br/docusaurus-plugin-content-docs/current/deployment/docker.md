@@ -12,8 +12,8 @@ O `Dockerfile` na raiz do projeto é uma construção **multi-stage** contendo e
 
 ### Estágios da Aplicação
 
-1.  **app-builder**: Instala as dependências com `yarn --frozen-lockfile` e constrói a aplicação. Utiliza **Docker BuildKit Secrets** para carregar variáveis de ambiente de forma segura durante o build sem deixar rastros no histórico da imagem.
-2.  **app**: A imagem final e mínima de runtime baseada no Alpine. Ela usa o output `standalone` do Next.js, ajusta as permissões corretas e executa a aplicação.
+1.  **app-builder**: Instala as dependências com `yarn --frozen-lockfile` e constrói a aplicação. Ele carrega as variáveis `NEXT_PUBLIC_*` como `ARG` durante o build.
+2.  **app**: A imagem final e mínima de runtime baseada no Alpine. Ela usa o output `standalone` do Next.js, ajusta as permissões corretas e utiliza o script `entrypoint.sh` para injetar variáveis de ambiente de forma segura em tempo de execução.
 
 ### Estágios da Documentação
 
@@ -22,40 +22,15 @@ O `Dockerfile` na raiz do projeto é uma construção **multi-stage** contendo e
 
 ## Construindo a Imagem da Aplicação Web
 
-Para construir a imagem manualmente de forma segura, usamos **Docker BuildKit Secrets**. Use `--build-arg BUILD_ENV` para determinar qual secret o Dockerfile deve carregar.
+Para construir a imagem manualmente, você deve passar as variáveis `NEXT_PUBLIC_*` necessárias como argumentos de build (`build-arg`):
 
-**Staging:**
-
-```bash
-docker build --target app -t my-org/millinks-webapp:staging \
-  --build-arg BUILD_ENV=staging \
-  --secret id=millinks_stg_webapp_env,src=.env.stg .
-```
-
-**Production:**
+**Build de Produção:**
 
 ```bash
 docker build --target app -t my-org/millinks-webapp:latest \
-  --build-arg BUILD_ENV=production \
-  --secret id=millinks_webapp_env,src=.env.prod .
-```
-
-## Criando a Secret no Docker Swarm (Opcional)
-
-Se você estiver implantando em um cluster Docker Swarm, crie a secret antes de executar o serviço:
-
-**Staging:**
-
-```bash
-# Cria o secret no cluster do Docker Swarm
-docker secret create millinks_stg_webapp_env .env.stg
-```
-
-**Production:**
-
-```bash
-# Cria o secret no cluster do Docker Swarm
-docker secret create millinks_webapp_env .env.prod
+  --build-arg NEXT_PUBLIC_API_BASE_URL=https://api.millinks.com \
+  --build-arg NEXT_PUBLIC_API_AUTH_URL=/auth/local \
+  .
 ```
 
 ## Executando o Contêiner da Aplicação Web
@@ -92,4 +67,4 @@ A documentação estará disponível em [http://localhost:8080](http://localhost
 
 ## .dockerignore
 
-O arquivo `.dockerignore` garante que diretórios desnecessários como `documentation/node_modules`, `skill/`, `.git/`, `node_modules/` e `.next/` sejam excluídos do contexto de build do Docker, mantendo a imagem enxuta e o build rápido.
+O arquivo `.dockerignore` garante que diretórios desnecessários como `documentation/node_modules`, `.agents/`, `.git/`, `node_modules/` e `.next/` sejam excluídos do contexto de build do Docker, mantendo a imagem enxuta e o build rápido.

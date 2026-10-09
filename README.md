@@ -96,7 +96,7 @@ docker compose --env-file .env.local up -d --build
 ```
 
 - **Web App**: Accessible at `http://localhost:3000`
-- **Documentation**: Accessible at `http://localhost:3001`
+- **Documentation**: Accessible at `http://localhost:8080`
 
 ### Using Docker Directly
 
@@ -109,17 +109,21 @@ Build the image passing the corresponding `.env` file as a secret. Use `--build-
 **Staging:**
 
 ```bash
-docker build --target app -t my-org/millinks-webapp:staging \
-  --build-arg BUILD_ENV=staging \
-  --secret id=millinks_stg_webapp_env,src=.env.stg .
+docker build --no-cache \
+  --target app $(grep -v '^#' .env.local | xargs -I {} echo "--build-arg {}") \
+  -t my-org/millinks-webapp:staging \
+  -t my-org/millinks-webapp:stg-$(git rev-parse --short HEAD 2>/dev/null) \
+  -f Dockerfile .
 ```
 
 **Production:**
 
 ```bash
-docker build --target app -t my-org/millinks-webapp:latest \
-  --build-arg BUILD_ENV=production \
-  --secret id=millinks_webapp_env,src=.env.prod .
+docker build --no-cache \
+  --target app \
+  -t my-org/millinks-webapp:latest \
+  -t my-org/millinks-webapp:$(git describe --tags --abbrev=0 2>/dev/null || echo "not-found-tag") \
+  -f Dockerfile .
 ```
 
 #### 2. Create Docker Swarm Secret
@@ -130,14 +134,16 @@ If you are deploying to a Docker Swarm cluster, create the secret before running
 
 ```bash
 # Cria o secret no cluster do Docker Swarm
-docker secret create millinks_stg_webapp_env .env.stg
+echo "client_id_staging" | docker secret create millinks_api_client_id_stg -
+echo -n "client_secret_staging" | docker secret create millinks_api_client_secret_stg -
 ```
 
 **Production:**
 
 ```bash
 # Cria o secret no cluster do Docker Swarm
-docker secret create millinks_webapp_env .env.prod
+echo "client_id_production" | docker secret create millinks_api_client_id_prd -
+echo -n "client_secret_production" | docker secret create millinks_api_client_secret_prd -
 ```
 
 #### 3. Run the Container
@@ -165,7 +171,7 @@ To build and run the documentation server:
 docker build --target docs -t my-org/millinks-docs .
 
 # Run
-docker run -dp 3001:80 --name millinks-docs my-org/millinks-docs
+docker run -dp 8080:8080 --name millinks-docs my-org/millinks-docs
 ```
 
 ## Contributing
