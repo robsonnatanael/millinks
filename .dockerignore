@@ -5,15 +5,17 @@
 .next/
 .vscode/
 .cache
-node_modules/
+**/node_modules
 out/
-skill/
+.agents/
+documentation/.docusaurus/
+documentation/build/
+yarn-error.log
+yarn-debug.log
 
 # Files Configs
 .dockerignore
 .editorconfig
-.eslintignore
-.eslintrc.json
 .env
 .env.*
 .gitignore

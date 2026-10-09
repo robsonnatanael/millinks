@@ -7,7 +7,7 @@ import { logger } from '@/lib/logger';
 import { AUTH_MESSAGES } from '../utils/messages';
 
 export const loginRequest = async ({ email, password }: LoginRequestProps) => {
-  const API_AUTH_URL = `${process.env.API_AUTH_URL}`;
+  const API_AUTH_URL = `${process.env.NEXT_PUBLIC_API_AUTH_URL}`;
   try {
     const response = await api.post<LoginResponseProps>(API_AUTH_URL, {
       identifier: email,

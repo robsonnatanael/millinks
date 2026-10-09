@@ -5,6 +5,14 @@
 # [Stage 1/2] building app
 FROM node:24.21.0-alpine3.24 AS app-builder
 
+ARG NEXT_PUBLIC_API_AUTH_URL
+ARG NEXT_PUBLIC_API_BASE_URL
+ARG NEXT_PUBLIC_BASE_PATH
+ARG NEXT_PUBLIC_FARO_ENVIRONMENT_NAME
+ARG NEXT_PUBLIC_FARO_APP_NAME
+ARG NEXT_PUBLIC_FARO_COLLECTOR_URL
+ARG NEXT_PUBLIC_GA_MEASUREMENT_ID
+
 # default environments var
 ENV NODE_OPTIONS='--max_old_space_size=2048'
 
@@ -16,34 +24,26 @@ COPY package.json yarn.lock ./
 RUN yarn --frozen-lockfile
 COPY . /app/
 
-ARG BUILD_ENV=production
-
-# build using secrets (Staging or Production)
-RUN --mount=type=secret,id=millinks_stg_webapp_env,required=false \
-    --mount=type=secret,id=millinks_webapp_env,required=false \
-    if [ "$BUILD_ENV" = "staging" ]; then \
-        export $(grep -v '^#' /run/secrets/millinks_stg_webapp_env | xargs) && yarn build; \
-    else \
-        export $(grep -v '^#' /run/secrets/millinks_webapp_env | xargs) && yarn build; \
-    fi
+RUN yarn build
 
 # [Stage 2/2] starting webserver
 FROM node:24.21.0-alpine3.24 AS app
 
-RUN apk update && apk upgrade --no-cache
-
-# labels
-LABEL maintainer="millinks" context="landing-page" project="millinks-webapp" "website.name"="MilLinks" "website.url"="https://millinks.com.br"
-
 # default environments var
-ARG TIME_ZONE=America/Fortaleza
-ENV TZ=$TIME_ZONE
+ENV TZ=America/Fortaleza
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
+RUN apk update && apk upgrade --no-cache
+
+# labels
+LABEL maintainer="millinks" context="landing-page" project="millinks-webapp" "website.name"="millinks" "website.url"="https://millinks.com.br"
+
 # basic config
-RUN apk add --no-cache tzdata
+RUN apk add --no-cache tzdata \
+    && cp /usr/share/zoneinfo/$TZ /etc/localtime \
+    && echo $TZ > /etc/timezone
 WORKDIR /app
 
 # Set correct permissions for nextjs user
@@ -56,10 +56,15 @@ COPY --from=app-builder /app/public ./public
 COPY --from=app-builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=app-builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Configure entrypoint to load secrets
+COPY --chown=nextjs:nodejs entrypoint.sh ./
+RUN chmod +x ./entrypoint.sh
+
 USER nextjs
 
 EXPOSE 3000
 
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["node", "server.js"]
 
 ## ==========================================
@@ -94,7 +99,15 @@ RUN yarn build
 # [Stage 2/2] serving documentation
 FROM nginx:1.31.6-alpine3.24 AS docs
 
+# default environments var
+ENV TZ=America/Fortaleza
+
 RUN apk update && apk upgrade --no-cache
+
+# Set timezone
+RUN apk add --no-cache tzdata \
+    && cp /usr/share/zoneinfo/$TZ /etc/localtime \
+    && echo $TZ > /etc/timezone
 
 # Disable absolute redirects to prevent Nginx from changing HTTPS to HTTP in slash redirects
 RUN sed -i 's/http {/http {\n    absolute_redirect off;/' /etc/nginx/nginx.conf

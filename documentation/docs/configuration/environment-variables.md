@@ -12,11 +12,16 @@ Create an `.env.local` file in the root of the project to store your local setti
 
 ```bash
 # Template for .env.local
-TIME_ZONE="America/Fortaleza"
-API_CLIENT_ID="your_client_id"
-API_CLIENT_SECRET="your_client_secret"
 NEXT_PUBLIC_API_AUTH_URL="/auth/local"
 NEXT_PUBLIC_API_BASE_URL="https://your-api-url.com/api"
+NEXT_PUBLIC_BASE_PATH=""
+NEXT_PUBLIC_FARO_ENVIRONMENT_NAME="development"
+NEXT_PUBLIC_FARO_APP_NAME="millinks"
+NEXT_PUBLIC_FARO_COLLECTOR_URL="http://localhost:12345/collect"
+NEXT_PUBLIC_GA_MEASUREMENT_ID="G-XXXXXXXXXX"
+
+API_CLIENT_ID="your_client_id"
+API_CLIENT_SECRET="your_client_secret"
 ```
 
 ## Variable Categories
@@ -27,6 +32,11 @@ Variables prefixed with `NEXT_PUBLIC_` are accessible from the browser. They are
 
 - `NEXT_PUBLIC_API_BASE_URL`: The root URL of the backend API, exposed to the client.
 - `NEXT_PUBLIC_API_AUTH_URL`: The specific authentication endpoint, exposed to the client.
+- `NEXT_PUBLIC_BASE_PATH`: Base path for the Next.js application router.
+- `NEXT_PUBLIC_FARO_ENVIRONMENT_NAME`: Observability environment name.
+- `NEXT_PUBLIC_FARO_APP_NAME`: Observability application name.
+- `NEXT_PUBLIC_FARO_COLLECTOR_URL`: Faro collector endpoint URL.
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID`: Google Analytics measurement ID.
 
 ### Server-Side Variables (Secure)
 
@@ -34,24 +44,12 @@ These variables are only accessible from the Node.js server side and are **never
 
 - `API_CLIENT_ID`: The unique identifier for internal service authentication.
 - `API_CLIENT_SECRET`: The secret key for internal service authentication (**Keep this secure!**).
-- `TIME_ZONE`: The timezone used by the application (e.g., `America/Fortaleza`).
 
 ## How Variables Are Used
 
-### In `next.config.ts`
-
-The `next.config.ts` maps the `NEXT_PUBLIC_*` variables into the `env` property, making them accessible via `process.env` on both client and server:
-
-```typescript
-env: {
-  API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
-  API_AUTH_URL: process.env.NEXT_PUBLIC_API_AUTH_URL,
-},
-```
-
 ### In Docker
 
-When building with Docker, the `NEXT_PUBLIC_*` variables must be passed as **build arguments** (`ARG`) because Next.js embeds them into the client bundle during `next build`. Runtime-only variables (like `API_CLIENT_ID`) are injected via the `env_file` directive in `docker-compose.yml`.
+When building with Docker, the `NEXT_PUBLIC_*` variables must be passed as **build arguments** (`ARG`) because Next.js embeds them into the client bundle during `next build`. Runtime-only variables (like `API_CLIENT_ID`) are injected at runtime via an `entrypoint.sh` script or environment files.
 
 For details, see the [Docker Compose](../deployment/docker-compose.md) documentation.
 
