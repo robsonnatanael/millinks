@@ -7,7 +7,13 @@ services:
       dockerfile: Dockerfile
       target: app
       args:
-        - TIME_ZONE=${TIME_ZONE:-America/Fortaleza}
+        - NEXT_PUBLIC_API_AUTH_URL
+        - NEXT_PUBLIC_API_BASE_URL
+        - NEXT_PUBLIC_BASE_PATH
+        - NEXT_PUBLIC_FARO_ENVIRONMENT_NAME
+        - NEXT_PUBLIC_FARO_APP_NAME
+        - NEXT_PUBLIC_FARO_COLLECTOR_URL
+        - NEXT_PUBLIC_GA_MEASUREMENT_ID
       secrets:
         - millinks_webapp_env
     env_file:

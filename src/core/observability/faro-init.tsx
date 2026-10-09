@@ -9,8 +9,14 @@ import packageJson from '../../../package.json';
 
 export function FaroInit() {
   const isInitialized = useRef(false);
+  const isProduction = process.env.NODE_ENV === 'production';
 
   useEffect(() => {
+    if (!isProduction) {
+      console.log('Faro initialization skipped: environment is not production');
+      return;
+    }
+
     if (typeof window !== 'undefined' && !isInitialized.current) {
       isInitialized.current = true;
 
